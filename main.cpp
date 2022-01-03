@@ -26,4 +26,5 @@ int	main()
 	cout << "Input count: " << network.countNeuronInput() << endl;
 	cout << "Output count: " << network.countNeuronOutput() << endl;
 	cout << "Neuron connections: " << network.countNeuronConnection() << endl;
+
 }

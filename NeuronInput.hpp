@@ -14,7 +14,7 @@ using namespace std;
 class NeuronInput : public Neuron
 {
 private:
-	vector<Neuron *> next_neurons;
+	vector<NeuronOutput *> next_neurons;
 private:
 	size_t	countNeuronNext() const;
 	void	addNeuronNext(NeuronOutput &neuron);

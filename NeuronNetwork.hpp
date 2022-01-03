@@ -20,6 +20,7 @@ private:
 	bool	isExistNeuron(NeuronInput &neuron);
 	bool	isExistNeuron(NeuronOutput &neuron);
 public:
+	~NeuronNetwork();
 	size_t	countNeuronInput() const;
 	void	addNeuronInput(NeuronInput &neuron);
 	void	removeNeuronInput(NeuronInput &neuron);

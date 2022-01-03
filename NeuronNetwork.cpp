@@ -20,6 +20,29 @@ bool	NeuronNetwork::isExistNeuron(NeuronOutput &neuron)
 	return (true);
 }
 
+NeuronNetwork::~NeuronNetwork()
+{
+	vector<NeuronInput *>::iterator input_begin = input_neurons.begin();
+	vector<NeuronInput *>::iterator input_end = input_neurons.end();
+	vector<NeuronOutput *>::iterator output_begin = output_neurons.begin();
+	vector<NeuronOutput *>::iterator output_end = output_neurons.end();
+
+	while (input_begin != input_end)
+	{
+		removeNeuronInput(**input_begin);
+		input_begin = input_neurons.begin();
+		input_end = input_neurons.end();
+	}
+	while (output_begin != output_end)
+	{
+		removeNeuronOutput(**output_begin);
+		output_begin = output_neurons.begin();
+		output_end = output_neurons.end();
+	}
+	input_neurons.clear();
+	output_neurons.clear();
+}
+
 size_t	NeuronNetwork::countNeuronInput() const
 {
 	return (input_neurons.size());
@@ -40,9 +63,9 @@ void	NeuronNetwork::removeNeuronInput(NeuronInput &neuron)
 	vector<NeuronInput *>::iterator position = std::find(input_neurons.begin(), input_neurons.end(), &neuron);
 	if (position == input_neurons.end())
 		return ;
-	input_neurons.erase(position);
 	neuron.setAvailable(true);
 	neuron.clearNeuronNext();
+	input_neurons.erase(position);
 }
 
 size_t	NeuronNetwork::countNeuronOutput() const
@@ -95,4 +118,9 @@ size_t	NeuronNetwork::countNeuronConnection() const
 		begin++;
 	}
 	return (count);
+}
+
+void	NeuronNetwork::learn(bool result)
+{
+
 }

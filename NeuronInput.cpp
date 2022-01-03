@@ -13,14 +13,14 @@ size_t	NeuronInput::countNeuronNext() const
 
 void	NeuronInput::addNeuronNext(NeuronOutput &neuron)
 {
-	vector<Neuron *>::iterator position = std::find(next_neurons.begin(), next_neurons.end(), &neuron);
+	vector<NeuronOutput *>::iterator position = std::find(next_neurons.begin(), next_neurons.end(), &neuron);
 	if (position == next_neurons.end())
 		next_neurons.push_back(&neuron);
 }
 
 void	NeuronInput::removeNeuronNext(NeuronOutput &neuron)
 {
-	vector<Neuron *>::iterator position = std::find(next_neurons.begin(), next_neurons.end(), &neuron);
+	vector<NeuronOutput *>::iterator position = std::find(next_neurons.begin(), next_neurons.end(), &neuron);
 	if (position == next_neurons.end())
 		return ;
 	next_neurons.erase(position);
