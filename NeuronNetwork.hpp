@@ -4,7 +4,16 @@
 
 #pragma once
 
+#include <vector>
+
+#include "NeuronIn.hpp"
+#include "NeuronDeep.hpp"
+#include "NeuronOut.hpp"
+#include "NeuronException.hpp"
+#include "NeuronFunctions.hpp"
+
 class NeuronNetwork
 {
-
+public:
+	void	setConnection(NeuronIn &in_neuron, NeuronOut &out_neuron);
 };

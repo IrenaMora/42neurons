@@ -14,12 +14,7 @@ using namespace std;
 
 int	main()
 {
-	try
-	{
-		NeuronIn	in_first;
-		NeuronDeep	deep_first;
-		NeuronOut	out_first;
-
-	}
-	catch (NeuronException &e) { cout << e.getMessage() << endl; }
+	NeuronIn	in_first;
+	NeuronDeep	deep_first;
+	NeuronOut	out_first;
 }
