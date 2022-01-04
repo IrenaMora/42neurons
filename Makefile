@@ -23,5 +23,6 @@ re: fclean all
 run:
 	@./$(NAME)
 
-test: all clean
+test: all
 	@./$(NAME)
+	@$(MAKE) fclean
