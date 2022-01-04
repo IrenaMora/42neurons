@@ -15,5 +15,5 @@
 class NeuronNetwork
 {
 public:
-	void	setConnection(NeuronIn &in_neuron, NeuronOut &out_neuron);
+	void	setConnection(NeuronIn &in_neuron, NeuronOut &out_neuron, double weight = 0);
 };
