@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "NeuronDifficult.hpp"
+#include "../interfaces/NeuronDifficult.hpp"
 
 class NeuronOut : public NeuronDifficult
 {

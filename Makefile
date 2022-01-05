@@ -1,15 +1,15 @@
 NAME = 42neurons
 
-CPPFILES = *.cpp
+CPPFILES = main.cpp */*.cpp
 
-HPPFILES = *.hpp
+HPPFILES = */*.hpp
 
 OBJFILES = *.o
 
 all: $(NAME)
 
 $(NAME): $(CPPFILES) $(HPPFILES)
-	@clang++ -c $(CPPFILES) -I. -std=c++98
+	@clang++ -c $(CPPFILES) -Ibase -Iconnection -Iexceptions -Iinterfaces -Inetwork -Ineurons -std=c++98
 	@clang++ $(OBJFILES) -o $(NAME) -std=c++98
 
 clean:

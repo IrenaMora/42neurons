@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "NeuronSimple.hpp"
+#include "../interfaces/NeuronSimple.hpp"
 
 class NeuronIn : public NeuronSimple
 {
