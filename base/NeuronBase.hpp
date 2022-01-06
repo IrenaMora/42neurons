@@ -9,3 +9,4 @@ class NeuronConnection;
 
 typedef vector<NeuronSimple *> t_VectorToNeurons;
 typedef vector<NeuronConnection> t_VectorNeuronConnections;
+typedef vector<NeuronConnection *> t_VectorNeuronToConnections;

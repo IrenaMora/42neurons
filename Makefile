@@ -9,8 +9,8 @@ OBJFILES = *.o
 all: $(NAME)
 
 $(NAME): $(CPPFILES) $(HPPFILES)
-	@clang++ -c $(CPPFILES) -Ibase -Iconnection -Iexceptions -Iinterfaces -Inetwork -Ineurons -std=c++98
-	@clang++ $(OBJFILES) -o $(NAME) -std=c++98
+	@clang++ -c $(CPPFILES) -Ibase -Iconnection -Iexceptions -Iinterfaces -Inetwork -Ineurons -std=c++11
+	@clang++ $(OBJFILES) -o $(NAME) -std=c++11
 
 clean:
 	@rm -rf $(OBJFILES)

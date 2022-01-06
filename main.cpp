@@ -18,19 +18,20 @@ int	main()
 	NeuronIn	in_first;
 	NeuronDeep	deep_first;
 	NeuronOut	out_first;
-	NeuronNetwork network;
+	NeuronNetwork *network = new NeuronNetwork();
 
 	try{
-		network.addNeuron(in_first);
-		network.addNeuron(deep_first);
-		network.addNeuron(out_first);
-		network.createConnection(in_first, deep_first);
-		network.createConnection(deep_first, out_first);
+		network->addNeuron(in_first);
+		network->addNeuron(deep_first);
+		network->addNeuron(out_first);
+		// network->createConnection(in_first, deep_first);
+		network->createConnection(deep_first, out_first);
 	}
 	catch (NeuronException &e)
 	{
 		cout << e.getMessage() << endl;
 	}
 
-	cout << "Connections count: " << network.getCountConnections() << endl;
+	cout << "Connections count: " << network->getCountConnections() << endl;
+	delete (network);
 }
