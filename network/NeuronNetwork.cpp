@@ -24,15 +24,15 @@ void	NeuronNetwork::addConnection(NeuronSimple &from, NeuronDifficult &to, doubl
 	t_VectorNeuronConnections::iterator begin;
 	t_VectorNeuronConnections::iterator end;
 
-	this->connections.push_back(NeuronConnection(from, to, weight));
+	this->connections.insert(NeuronConnection(from, to, weight));
 	begin = this->connections.begin();
 	end = this->connections.end();
 	while (begin != end)
 	{
 		if (&begin->getNeuronFrom() == &from && &begin->getNeuronTo() == &to)
 		{
-			from.addConnection(*begin);
-			to.addConnection(*begin);
+			from.addConnection(const_cast<NeuronConnection &>(*begin));
+			to.addConnection(const_cast<NeuronConnection &>(*begin));
 			return ;
 		}
 		begin++;
@@ -52,8 +52,8 @@ void	NeuronNetwork::removeAllConnections(NeuronSimple &neuron)
 	{
 		if (&begin->getNeuronFrom() == &neuron || &begin->getNeuronTo() == &neuron)
 		{
-			begin->getNeuronFrom().removeConnection(*begin);
-			begin->getNeuronTo().removeConnection(*begin);
+			begin->getNeuronFrom().removeConnection(const_cast<NeuronConnection &>(*begin));
+			begin->getNeuronTo().removeConnection(const_cast<NeuronConnection &>(*begin));
 			this->connections.erase(begin);
 			begin = this->connections.begin();
 			end = this->connections.end();
@@ -84,7 +84,7 @@ void	NeuronNetwork::addNeuron(NeuronSimple &neuron)
 	if (!neuron.isAvailable())
 		throw (NeuronException(0, "This neuron already exist in another neural network"));
 	neuron.setAvailable(false);
-	this->neurons.push_back(&neuron);
+	this->neurons.insert(&neuron);
 }
 
 void	NeuronNetwork::removeNeuron(NeuronSimple &neuron)

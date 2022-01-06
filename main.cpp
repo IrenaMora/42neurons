@@ -5,6 +5,7 @@
 //#include ".hpp"
 
 #include <iostream>
+#include <set>
 #include "network/NeuronNetwork.hpp"
 #include "neurons/NeuronIn.hpp"
 #include "neurons/NeuronDeep.hpp"
@@ -24,7 +25,7 @@ int	main()
 		network->addNeuron(in_first);
 		network->addNeuron(deep_first);
 		network->addNeuron(out_first);
-		// network->createConnection(in_first, deep_first);
+		network->createConnection(in_first, deep_first);
 		network->createConnection(deep_first, out_first);
 	}
 	catch (NeuronException &e)

@@ -4,8 +4,6 @@
 
 #pragma once
 
-#include <vector>
-
 #include "../neurons/NeuronIn.hpp"
 #include "../neurons/NeuronDeep.hpp"
 #include "../neurons/NeuronOut.hpp"

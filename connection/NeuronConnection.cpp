@@ -49,3 +49,8 @@ bool	NeuronConnection::isAlreadyConnected(t_VectorNeuronConnections &connections
 	}
 	return (false);
 }
+
+bool	operator < (const NeuronConnection &first, const NeuronConnection &second)
+{
+	return (&first < &second);
+}

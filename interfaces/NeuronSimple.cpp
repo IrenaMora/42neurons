@@ -37,7 +37,7 @@ void	NeuronSimple::addConnection(NeuronConnection &connection)
 {
 	if (isExistConnection(connection))
 		throw (NeuronException(0, "This connection already exist"));
-	this->connections.push_back(&connection);
+	this->connections.insert(&connection);
 }
 
 void	NeuronSimple::removeConnection(NeuronConnection &connection)

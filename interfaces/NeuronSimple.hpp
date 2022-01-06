@@ -7,7 +7,6 @@
 #include "../exceptions/NeuronException.hpp"
 
 #include <iostream>
-#include <vector>
 #include "../base/NeuronBase.hpp"
 
 using namespace std;

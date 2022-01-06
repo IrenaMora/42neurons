@@ -22,4 +22,5 @@ public:
 	NeuronDifficult	&getNeuronTo() const;
 	void	setNeuronTo(NeuronDifficult &to);
 	static bool	isAlreadyConnected(t_VectorNeuronConnections &connections, NeuronSimple &from, NeuronDifficult &to);
+	friend bool	operator < (const NeuronConnection &first, const NeuronConnection &second);
 };
