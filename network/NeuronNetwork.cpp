@@ -119,9 +119,10 @@ void	NeuronNetwork::disableAllNeurons()
 
 void	NeuronNetwork::computeNeuron(NeuronSimple *next, double resume)
 {
+//	cout << next->getStatus() << " + " << resume << " = " << next->getStatus() + resume << endl;
 	if (!isNeuronIn(*next))
 	{
-		cout << next->getStatus() << " * " << resume << endl;
+		cout << next->getStatus() << " + " << resume << " = " << next->getStatus() + resume << endl;
 		next->setStatus(next->getStatus() + resume);
 	}
 	if (isNeuronOut(*next))

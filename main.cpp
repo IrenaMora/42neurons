@@ -33,8 +33,8 @@ int	main()
 		network->createConnection(in_second, deep_first, 0.7);
 		network->createConnection(in_first, deep_second, 0.2);
 		network->createConnection(in_second, deep_second, 0.9);
-		network->createConnection(deep_first, out_first, 2);
-		network->createConnection(deep_second, out_first, 3);
+//		network->createConnection(deep_first, out_first, 2);
+//		network->createConnection(deep_second, out_first, 3);
 	}
 	catch (NeuronException &e)
 	{
