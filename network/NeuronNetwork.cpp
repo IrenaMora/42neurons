@@ -24,6 +24,7 @@ void	NeuronNetwork::addConnection(NeuronSimple &from, NeuronDifficult &to, doubl
 	to.addConnection(const_cast<NeuronConnection &>(*current));
 }
 
+//TODO: optimize this method using and realizing method neuron.getConnections()
 void	NeuronNetwork::removeAllConnections(NeuronSimple &neuron)
 {
 	t_VectorNeuronConnections::iterator begin;
@@ -117,6 +118,7 @@ void	NeuronNetwork::disableAllNeurons()
 	}
 }
 
+//TODO: optimize this method using and realizing method next->getConnections()
 void	NeuronNetwork::computeNeuron(NeuronSimple *next, double resume)
 {
 	if (!isNeuronIn(*next))
