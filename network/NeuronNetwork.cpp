@@ -15,28 +15,13 @@ NeuronNetwork::~NeuronNetwork()
 		begin = this->neurons.begin();
 		end = this->neurons.end();
 	}
-	std::cout << "Neurons: " << getCountNeurons() << endl;
-	std::cout << "Connections: " << getCountConnections() << endl;
 }
 
 void	NeuronNetwork::addConnection(NeuronSimple &from, NeuronDifficult &to, double weight)
 {
-	t_VectorNeuronConnections::iterator begin;
-	t_VectorNeuronConnections::iterator end;
-
-	this->connections.insert(NeuronConnection(from, to, weight));
-	begin = this->connections.begin();
-	end = this->connections.end();
-	while (begin != end)
-	{
-		if (&begin->getNeuronFrom() == &from && &begin->getNeuronTo() == &to)
-		{
-			from.addConnection(const_cast<NeuronConnection &>(*begin));
-			to.addConnection(const_cast<NeuronConnection &>(*begin));
-			return ;
-		}
-		begin++;
-	}
+	t_VectorNeuronConnections::iterator current = this->connections.insert(NeuronConnection(from, to, weight)).first;
+	from.addConnection(const_cast<NeuronConnection &>(*current));
+	to.addConnection(const_cast<NeuronConnection &>(*current));
 }
 
 void	NeuronNetwork::removeAllConnections(NeuronSimple &neuron)

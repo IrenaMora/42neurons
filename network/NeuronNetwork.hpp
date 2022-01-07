@@ -27,4 +27,5 @@ public:
 	void	createConnection(NeuronSimple &from, NeuronDifficult &to, double weight = 0);
 	size_t	getCountNeurons();
 	size_t	getCountConnections();
+	void	learn();
 };
