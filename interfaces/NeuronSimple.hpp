@@ -16,6 +16,7 @@ class NeuronNetwork;
 class NeuronSimple
 {
 private:
+	double	status;
 	bool	is_available;
 	t_VectorNeuronToConnections connections;
 private:
@@ -26,7 +27,6 @@ private:
 	void	removeConnection(NeuronConnection &connection);
 public:
 	virtual ~NeuronSimple() {};
-	double	status; //TODO: go to the private block
 	NeuronSimple(double status = 0);
 	double	getStatus() const;
 	void	setStatus(double status);

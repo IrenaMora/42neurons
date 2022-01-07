@@ -119,12 +119,8 @@ void	NeuronNetwork::disableAllNeurons()
 
 void	NeuronNetwork::computeNeuron(NeuronSimple *next, double resume)
 {
-//	cout << next->getStatus() << " + " << resume << " = " << next->getStatus() + resume << endl;
 	if (!isNeuronIn(*next))
-	{
-		cout << next->getStatus() << " + " << resume << " = " << next->getStatus() + resume << endl;
 		next->setStatus(next->getStatus() + resume);
-	}
 	if (isNeuronOut(*next))
 		return ;
 	t_VectorNeuronConnections::iterator begin = this->connections.begin();
@@ -132,10 +128,7 @@ void	NeuronNetwork::computeNeuron(NeuronSimple *next, double resume)
 	while (begin != end)
 	{
 		if (&begin->getNeuronFrom() == next)
-		{
-			resume = resume * begin->getWeight();
-			computeNeuron(&begin->getNeuronTo(), resume);
-		}
+			computeNeuron(&begin->getNeuronTo(), resume * begin->getWeight());
 		begin++;
 	}
 }
