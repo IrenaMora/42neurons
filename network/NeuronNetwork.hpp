@@ -19,6 +19,13 @@ private:
 private:
 	void	addConnection(NeuronSimple &from, NeuronDifficult &to, double weight = 0);
 	void	removeAllConnections(NeuronSimple &neuron);
+	bool	isNeuronSimple(NeuronSimple &neuron);
+	bool	isNeuronDifficult(NeuronSimple &neuron);
+	bool	isNeuronIn(NeuronSimple &neuron);
+	bool	isNeuronDeep(NeuronSimple &neuron);
+	bool	isNeuronOut(NeuronSimple &neuron);
+	void	disableAllNeurons();
+	void	computeNeuron(NeuronSimple *next, double resume);
 public:
 	~NeuronNetwork();
 	bool	isExistNeuron(NeuronSimple &neuron);
@@ -27,5 +34,5 @@ public:
 	void	createConnection(NeuronSimple &from, NeuronDifficult &to, double weight = 0);
 	size_t	getCountNeurons();
 	size_t	getCountConnections();
-	void	learn();
+	void	compute();
 };

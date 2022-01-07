@@ -7,8 +7,8 @@
 class NeuronFunctions {
 public:
 	static double	getDelta(double expectation, double result);
-	double			getWeightDelta(double delta, double weight);
-	double			getNewWeight(double weight_delta, double learn_rate);
+	static double	getWeightDelta(double delta, double weight);
+	static double	getNewWeight(double weight_delta, double learn_rate);
 	static double	getSigma(double value);
 	static double	getDerivativeSigma(double value);
 	static double	getReLU(double value);

@@ -64,8 +64,6 @@ double	NeuronSimple::getStatus() const
 
 void	NeuronSimple::setStatus(double status)
 {
-	if (status < 0.0 || status > 1.0)
-		throw (NeuronException(0, "The status cannot be less than 0 or more than 1"));
 	this->status = status;
 }
 

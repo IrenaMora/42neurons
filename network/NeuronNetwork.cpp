@@ -48,6 +48,97 @@ void	NeuronNetwork::removeAllConnections(NeuronSimple &neuron)
 	}
 }
 
+bool	NeuronNetwork::isNeuronSimple(NeuronSimple &neuron)
+{
+	try
+	{
+		(void)dynamic_cast<NeuronSimple &>(neuron);
+		return (true);
+	}
+	catch (std::bad_cast) {}
+	return (false);
+}
+
+bool	NeuronNetwork::isNeuronDifficult(NeuronSimple &neuron)
+{
+	try
+	{
+		(void)dynamic_cast<NeuronDifficult &>(neuron);
+		return (true);
+	}
+	catch (std::bad_cast) {}
+	return (false);
+}
+
+bool	NeuronNetwork::isNeuronIn(NeuronSimple &neuron)
+{
+	try
+	{
+		(void)dynamic_cast<NeuronIn &>(neuron);
+		return (true);
+	}
+	catch (std::bad_cast) {}
+	return (false);
+}
+
+bool	NeuronNetwork::isNeuronDeep(NeuronSimple &neuron)
+{
+	try
+	{
+		(void)dynamic_cast<NeuronDeep &>(neuron);
+		return (true);
+	}
+	catch (std::bad_cast) {}
+	return (false);
+}
+
+
+bool	NeuronNetwork::isNeuronOut(NeuronSimple &neuron)
+{
+	try
+	{
+		(void)dynamic_cast<NeuronOut &>(neuron);
+		return (true);
+	}
+	catch (std::bad_cast) {}
+	return (false);
+}
+
+void	NeuronNetwork::disableAllNeurons()
+{
+	t_VectorToNeurons::iterator begin = this->neurons.begin();
+	t_VectorToNeurons::iterator end = this->neurons.end();
+
+	while (begin != end)
+	{
+		if (isNeuronDifficult(**begin))
+			(*begin)->setStatus(0);
+		begin++;
+	}
+}
+
+void	NeuronNetwork::computeNeuron(NeuronSimple *next, double resume)
+{
+	if (!isNeuronIn(*next))
+	{
+		cout << next->getStatus() << " * " << resume << endl;
+		next->setStatus(next->getStatus() + resume);
+	}
+	if (isNeuronOut(*next))
+		return ;
+	t_VectorNeuronConnections::iterator begin = this->connections.begin();
+	t_VectorNeuronConnections::iterator end = this->connections.end();
+	while (begin != end)
+	{
+		if (&begin->getNeuronFrom() == next)
+		{
+			resume = resume * begin->getWeight();
+			computeNeuron(&begin->getNeuronTo(), resume);
+		}
+		begin++;
+	}
+}
+
 bool	NeuronNetwork::isExistNeuron(NeuronSimple &neuron)
 {
 	t_VectorToNeurons::iterator begin = this->neurons.begin();
@@ -78,7 +169,7 @@ void	NeuronNetwork::removeNeuron(NeuronSimple &neuron)
 	t_VectorToNeurons::iterator end;
 
 	if (neuron.isAvailable())
-		throw (NeuronException(0, "The neuron does not use in this neural network1"));
+		throw (NeuronException(0, "The neuron does not use in this neural network"));
 	begin = this->neurons.begin();
 	end = this->neurons.end();
 	while (begin != end)
@@ -93,7 +184,7 @@ void	NeuronNetwork::removeNeuron(NeuronSimple &neuron)
 		begin++;
 	}
 	//Нейрон не найден
-	throw (NeuronException(0, "The neuron does not use in this neural network2"));
+	throw (NeuronException(0, "The neuron does not use in this neural network"));
 }
 
 void	NeuronNetwork::createConnection(NeuronSimple &from, NeuronDifficult &to, double weight)
@@ -113,4 +204,18 @@ size_t	NeuronNetwork::getCountNeurons()
 size_t	NeuronNetwork::getCountConnections()
 {
 	return (this->connections.size());
+}
+
+void	NeuronNetwork::compute()
+{
+	t_VectorToNeurons::iterator begin = this->neurons.begin();
+	t_VectorToNeurons::iterator end = this->neurons.end();
+
+	disableAllNeurons();
+	while (begin != end)
+	{
+		if (isNeuronIn(**begin))
+			computeNeuron(*begin, (*begin)->getStatus());
+		begin++;
+	}
 }
