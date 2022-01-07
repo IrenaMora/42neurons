@@ -24,5 +24,4 @@ run:
 	@./$(NAME)
 
 test: all
-	@./$(NAME)
-	@$(MAKE) fclean
+	@./$(NAME) && $(MAKE) fclean
