@@ -4,4 +4,14 @@
 
 #include "NeuronOut.hpp"
 
-NeuronOut::NeuronOut(double resumeMinimum, double resumeMaximum) : NeuronDifficult(resumeMinimum, resumeMaximum) {}
+NeuronOut::NeuronOut(double expectedStatus) : expectedStatus(expectedStatus) {}
+
+void    NeuronOut::setExpectedStatus(double expectedStatus)
+{
+    this->expectedStatus = expectedStatus;
+}
+
+double    NeuronOut::getExpectedStatus() const
+{
+    return (this->expectedStatus);
+}

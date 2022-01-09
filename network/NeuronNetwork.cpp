@@ -17,7 +17,7 @@ NeuronNetwork::~NeuronNetwork()
 	}
 }
 
-void	NeuronNetwork::addConnection(NeuronSimple &from, NeuronDifficult &to, double weight)
+void	NeuronNetwork::addConnection(NeuronSimple &from, NeuronSimple &to, double weight)
 {
 	t_VectorNeuronConnections::iterator current = this->connections.insert(NeuronConnection(from, to, weight)).first;
 	from.addConnection(const_cast<NeuronConnection &>(*current));
@@ -47,28 +47,6 @@ void	NeuronNetwork::removeAllConnections(NeuronSimple &neuron)
 		}
 		begin++;
 	}
-}
-
-bool	NeuronNetwork::isNeuronSimple(NeuronSimple &neuron)
-{
-	try
-	{
-		(void)dynamic_cast<NeuronSimple &>(neuron);
-		return (true);
-	}
-	catch (std::bad_cast) {}
-	return (false);
-}
-
-bool	NeuronNetwork::isNeuronDifficult(NeuronSimple &neuron)
-{
-	try
-	{
-		(void)dynamic_cast<NeuronDifficult &>(neuron);
-		return (true);
-	}
-	catch (std::bad_cast) {}
-	return (false);
 }
 
 bool	NeuronNetwork::isNeuronIn(NeuronSimple &neuron)
@@ -112,7 +90,7 @@ void	NeuronNetwork::disableAllNeurons()
 
 	while (begin != end)
 	{
-		if (isNeuronDifficult(**begin))
+		if (!isNeuronIn(**begin))
 			(*begin)->setStatus(0);
 		begin++;
 	}
@@ -183,12 +161,13 @@ void	NeuronNetwork::removeNeuron(NeuronSimple &neuron)
 	throw (NeuronException(0, "The neuron does not use in this neural network"));
 }
 
-void	NeuronNetwork::createConnection(NeuronSimple &from, NeuronDifficult &to, double weight)
+void	NeuronNetwork::createConnection(NeuronSimple &from, NeuronSimple &to, double weight)
 {
 	if (!isExistNeuron(from) || !isExistNeuron(to))
 		throw (NeuronException(0, "The neuron(-s) is not in this neural network"));
 	if (NeuronConnection::isAlreadyConnected(this->connections, from, to))
 		throw (NeuronException(0, "This connection already exists"));
+	//TODO: it's exception when neuron 'from' is NeuronOut
 	addConnection(from, to, weight);
 }
 

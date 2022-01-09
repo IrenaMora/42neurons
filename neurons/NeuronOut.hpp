@@ -4,13 +4,15 @@
 
 #pragma once
 
-#include "../interfaces/NeuronDifficult.hpp"
+#include "../interfaces/NeuronSimple.hpp"
 
-class NeuronOut : public NeuronDifficult
+class NeuronOut : public NeuronSimple
 {
 private:
-	using NeuronDifficult::setStatus;
-	using NeuronDifficult::setResume;
+	using NeuronSimple::setStatus;
+	double	expectedStatus;
 public:
-	NeuronOut(double resumeMinimum = 0, double resumeMaximum = 0);
+	NeuronOut(double expectedStatus = 0.0);
+	void	setExpectedStatus(double expectedStatus);
+	double	getExpectedStatus() const;
 };

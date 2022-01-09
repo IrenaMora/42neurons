@@ -4,4 +4,4 @@
 
 #include "NeuronDeep.hpp"
 
-NeuronDeep::NeuronDeep(double resumeMinimum, double resumeMaximum) : NeuronDifficult(resumeMinimum, resumeMaximum) {}
+NeuronDeep::NeuronDeep() : NeuronSimple() {}

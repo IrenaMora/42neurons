@@ -17,10 +17,8 @@ private:
 	t_VectorToNeurons	neurons;
 	t_VectorNeuronConnections	connections;
 private:
-	void	addConnection(NeuronSimple &from, NeuronDifficult &to, double weight = 0);
+	void	addConnection(NeuronSimple &from, NeuronSimple &to, double weight = 0);
 	void	removeAllConnections(NeuronSimple &neuron);
-	bool	isNeuronSimple(NeuronSimple &neuron);
-	bool	isNeuronDifficult(NeuronSimple &neuron);
 	bool	isNeuronIn(NeuronSimple &neuron);
 	bool	isNeuronDeep(NeuronSimple &neuron);
 	bool	isNeuronOut(NeuronSimple &neuron);
@@ -31,7 +29,7 @@ public:
 	bool	isExistNeuron(NeuronSimple &neuron);
 	void	addNeuron(NeuronSimple &neuron);
 	void	removeNeuron(NeuronSimple &neuron);
-	void	createConnection(NeuronSimple &from, NeuronDifficult &to, double weight = 0);
+	void	createConnection(NeuronSimple &from, NeuronSimple &to, double weight = 0);
 	size_t	getCountNeurons();
 	size_t	getCountConnections();
 	void	compute();

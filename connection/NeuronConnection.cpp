@@ -4,7 +4,7 @@
 
 #include "NeuronConnection.hpp"
 
-NeuronConnection::NeuronConnection(NeuronSimple &from, NeuronDifficult &to, double weight) : from(&from), to(&to), weight(weight) {}
+NeuronConnection::NeuronConnection(NeuronSimple &from, NeuronSimple &to, double weight) : from(&from), to(&to), weight(weight) {}
 
 double	NeuronConnection::getWeight() const
 {
@@ -26,17 +26,17 @@ void	NeuronConnection::setNeuronFrom(NeuronSimple &from)
 	this->from = &from;
 }
 
-NeuronDifficult	&NeuronConnection::getNeuronTo() const
+NeuronSimple	&NeuronConnection::getNeuronTo() const
 {
 	return (*this->to);
 }
 
-void	NeuronConnection::setNeuronTo(NeuronDifficult &to)
+void	NeuronConnection::setNeuronTo(NeuronSimple &to)
 {
 	this->to = &to;
 }
 
-bool	NeuronConnection::isAlreadyConnected(t_VectorNeuronConnections &connections, NeuronSimple &from, NeuronDifficult &to)
+bool	NeuronConnection::isAlreadyConnected(t_VectorNeuronConnections &connections, NeuronSimple &from, NeuronSimple &to)
 {
 	t_VectorNeuronConnections::const_iterator begin = connections.cbegin();
 	t_VectorNeuronConnections::const_iterator end = connections.cend();
