@@ -25,7 +25,7 @@ private:
 	bool	isNeuronOut(NeuronSimple &neuron);
 	void	disableAllNeurons();
 	void	computeNeuron(NeuronSimple *next, double resume);
-	void	learnNeuron(NeuronSimple &neuron, double delta_weight);
+	void	learnNeuron(NeuronSimple &neuron, double sigma_weight);
 public:
 	~NeuronNetwork();
 	bool	isExistNeuron(NeuronSimple &neuron);

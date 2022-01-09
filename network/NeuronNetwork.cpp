@@ -24,25 +24,25 @@ void	NeuronNetwork::addConnection(NeuronSimple &from, NeuronSimple &to, double w
 	to.addConnection(const_cast<NeuronConnection &>(*current));
 }
 
-//TODO: optimize this method using and realizing method neuron.getAllConnections()
+//TODO: optimize this method using and realizing method neuron.getAllConnectionsFrom() and neuron.getAllConnectionsTo()
 void	NeuronNetwork::removeAllConnections(NeuronSimple &neuron)
 {
-	t_VectorNeuronConnections::iterator begin;
-	t_VectorNeuronConnections::iterator end;
+	NeuronConnection *currentConnection;
 
 	if (!isExistNeuron(neuron))
 		throw (NeuronException(0, "The neuron is not exist in this neural network"));
-	begin = this->connections.begin();
-	end = this->connections.end();
+	t_VectorNeuronToConnections::iterator begin = neuron.getAllConnections().begin();
+	t_VectorNeuronToConnections::iterator end = neuron.getAllConnections().end();
 	while (begin != end)
 	{
-		if (&begin->getNeuronFrom() == &neuron || &begin->getNeuronTo() == &neuron)
+		currentConnection = *begin;
+		if (&currentConnection->getNeuronFrom() == &neuron || &currentConnection->getNeuronTo() == &neuron)
 		{
-			begin->getNeuronFrom().removeConnection(const_cast<NeuronConnection &>(*begin));
-			begin->getNeuronTo().removeConnection(const_cast<NeuronConnection &>(*begin));
-			this->connections.erase(begin);
-			begin = this->connections.begin();
-			end = this->connections.end();
+			currentConnection->getNeuronFrom().removeConnection(const_cast<NeuronConnection &>(*currentConnection));
+			currentConnection->getNeuronTo().removeConnection(const_cast<NeuronConnection &>(*currentConnection));
+			this->connections.erase(*currentConnection);
+			begin = neuron.getAllConnections().begin();
+			end = neuron.getAllConnections().end();
 			continue ;
 		}
 		begin++;
@@ -96,24 +96,27 @@ void	NeuronNetwork::disableAllNeurons()
 	}
 }
 
-//TODO: optimize this method using and realizing method next->getAllConnections()
+//TODO: optimize this method using and realizing method neuron.getAllConnectionsFrom() and neuron.getAllConnectionsTo()
 void	NeuronNetwork::computeNeuron(NeuronSimple *next, double resume)
 {
+	NeuronConnection *currentConnection;
+
 	if (!isNeuronIn(*next))
 		next->setStatus(next->getStatus() + resume);
 	if (isNeuronOut(*next))
 		return ;
-	t_VectorNeuronConnections::iterator begin = this->connections.begin();
-	t_VectorNeuronConnections::iterator end = this->connections.end();
+	t_VectorNeuronToConnections::iterator begin = next->getAllConnections().begin();
+	t_VectorNeuronToConnections::iterator end = next->getAllConnections().end();
 	while (begin != end)
 	{
-		if (&begin->getNeuronFrom() == next)
-			computeNeuron(&begin->getNeuronTo(), resume * begin->getWeight());
+		currentConnection = *begin;
+		if (&currentConnection->getNeuronFrom() == next)
+			computeNeuron(&currentConnection->getNeuronTo(), resume * currentConnection->getWeight());
 		begin++;
 	}
 }
 
-void	NeuronNetwork::learnNeuron(NeuronSimple &neuron, double delta_weight)
+void	NeuronNetwork::learnNeuron(NeuronSimple &neuron, double sigma_weight)
 {
 	double delta_current_weight;
 	NeuronConnection *currentConnection;
@@ -125,9 +128,9 @@ void	NeuronNetwork::learnNeuron(NeuronSimple &neuron, double delta_weight)
 		currentConnection = dynamic_cast<NeuronConnection *>(*begin);
 		if (&(currentConnection->getNeuronTo()) == &neuron)
 		{
-			delta_current_weight = delta_weight * currentConnection->getWeight() * currentConnection->getNeuronFrom().getStatus() * 0.1;
+			delta_current_weight = sigma_weight * currentConnection->getWeight() * currentConnection->getNeuronFrom().getStatus() * 0.1;
 			currentConnection->setWeight(currentConnection->getWeight() + delta_current_weight);
-			learnNeuron(currentConnection->getNeuronFrom(), delta_weight);
+			learnNeuron(currentConnection->getNeuronFrom(), sigma_weight);
 		}
 		begin++;
 	}
@@ -219,7 +222,7 @@ void	NeuronNetwork::compute()
 void	NeuronNetwork::learn()
 {
 	double delta;
-	double delta_weight;
+	double sigma_weight;
 	NeuronSimple *currentNeuron;
 	NeuronConnection *currentConnection;
 
@@ -237,9 +240,9 @@ void	NeuronNetwork::learn()
 			while (begin2 != end2)
 			{
 				currentConnection = *begin2;
-				delta_weight = delta * currentConnection->getWeight();
-				currentConnection->setWeight(currentConnection->getWeight() + (delta_weight * 0.1));
-				learnNeuron(currentConnection->getNeuronFrom(), delta_weight);
+				sigma_weight = delta * currentConnection->getWeight();
+				currentConnection->setWeight(currentConnection->getWeight() + (sigma_weight * 0.1));
+				learnNeuron(currentConnection->getNeuronFrom(), sigma_weight);
 				begin2++;
 			}
 		}

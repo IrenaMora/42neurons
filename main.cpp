@@ -84,7 +84,7 @@ int	main()
 	network->compute();
 	cout << "Out status: " << out_first.getStatus() << endl;
 	cout << "Expected status: " << out_first.getExpectedStatus() << endl << endl;
-	for (int i = 1; i < 10; i++)
+	for (int i = 1; i < 1000; i++)
 	{
 		network->learn();
 		network->compute();
