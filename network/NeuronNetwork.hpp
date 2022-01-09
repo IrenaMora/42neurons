@@ -9,6 +9,7 @@
 #include "../neurons/NeuronOut.hpp"
 #include "../exceptions/NeuronException.hpp"
 #include "../base/NeuronBase.hpp"
+#include "../base/NeuronFunctions.hpp"
 #include "../connection/NeuronConnection.hpp"
 
 class NeuronNetwork
@@ -24,6 +25,7 @@ private:
 	bool	isNeuronOut(NeuronSimple &neuron);
 	void	disableAllNeurons();
 	void	computeNeuron(NeuronSimple *next, double resume);
+	void	learnNeuron(NeuronSimple &neuron, double delta_weight);
 public:
 	~NeuronNetwork();
 	bool	isExistNeuron(NeuronSimple &neuron);
@@ -33,4 +35,5 @@ public:
 	size_t	getCountNeurons();
 	size_t	getCountConnections();
 	void	compute();
+	void	learn();
 };

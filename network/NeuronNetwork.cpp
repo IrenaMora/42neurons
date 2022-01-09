@@ -24,7 +24,7 @@ void	NeuronNetwork::addConnection(NeuronSimple &from, NeuronSimple &to, double w
 	to.addConnection(const_cast<NeuronConnection &>(*current));
 }
 
-//TODO: optimize this method using and realizing method neuron.getConnections()
+//TODO: optimize this method using and realizing method neuron.getAllConnections()
 void	NeuronNetwork::removeAllConnections(NeuronSimple &neuron)
 {
 	t_VectorNeuronConnections::iterator begin;
@@ -96,7 +96,7 @@ void	NeuronNetwork::disableAllNeurons()
 	}
 }
 
-//TODO: optimize this method using and realizing method next->getConnections()
+//TODO: optimize this method using and realizing method next->getAllConnections()
 void	NeuronNetwork::computeNeuron(NeuronSimple *next, double resume)
 {
 	if (!isNeuronIn(*next))
@@ -109,6 +109,26 @@ void	NeuronNetwork::computeNeuron(NeuronSimple *next, double resume)
 	{
 		if (&begin->getNeuronFrom() == next)
 			computeNeuron(&begin->getNeuronTo(), resume * begin->getWeight());
+		begin++;
+	}
+}
+
+void	NeuronNetwork::learnNeuron(NeuronSimple &neuron, double delta_weight)
+{
+	double delta_current_weight;
+	NeuronConnection *currentConnection;
+	t_VectorNeuronToConnections::iterator begin = neuron.getAllConnections().begin();
+	t_VectorNeuronToConnections::iterator end = neuron.getAllConnections().end();
+
+	while (begin != end)
+	{
+		currentConnection = dynamic_cast<NeuronConnection *>(*begin);
+		if (&(currentConnection->getNeuronTo()) == &neuron)
+		{
+			delta_current_weight = delta_weight * currentConnection->getWeight() * currentConnection->getNeuronFrom().getStatus() * 0.1;
+			currentConnection->setWeight(currentConnection->getWeight() + delta_current_weight);
+			learnNeuron(currentConnection->getNeuronFrom(), delta_weight);
+		}
 		begin++;
 	}
 }
@@ -167,7 +187,8 @@ void	NeuronNetwork::createConnection(NeuronSimple &from, NeuronSimple &to, doubl
 		throw (NeuronException(0, "The neuron(-s) is not in this neural network"));
 	if (NeuronConnection::isAlreadyConnected(this->connections, from, to))
 		throw (NeuronException(0, "This connection already exists"));
-	//TODO: it's exception when neuron 'from' is NeuronOut
+	if (isNeuronOut(from))
+		throw (NeuronException(0, "Neuron FROM cannot be NeuronOut"));
 	addConnection(from, to, weight);
 }
 
@@ -191,6 +212,37 @@ void	NeuronNetwork::compute()
 	{
 		if (isNeuronIn(**begin))
 			computeNeuron(*begin, (*begin)->getStatus());
+		begin++;
+	}
+}
+
+void	NeuronNetwork::learn()
+{
+	double delta;
+	double delta_weight;
+	NeuronSimple *currentNeuron;
+	NeuronConnection *currentConnection;
+
+	this->compute();
+	t_VectorToNeurons::iterator begin = this->neurons.begin();
+	t_VectorToNeurons::iterator end = this->neurons.end();
+	while (begin != end)
+	{
+		currentNeuron = *begin;
+		if (isNeuronOut(*currentNeuron))
+		{
+			delta = dynamic_cast<NeuronOut *>(currentNeuron)->getExpectedStatus() - currentNeuron->getStatus();
+			t_VectorNeuronToConnections::iterator begin2 = currentNeuron->getAllConnections().begin();
+			t_VectorNeuronToConnections::iterator end2 = currentNeuron->getAllConnections().end();
+			while (begin2 != end2)
+			{
+				currentConnection = *begin2;
+				delta_weight = delta * currentConnection->getWeight();
+				currentConnection->setWeight(currentConnection->getWeight() + (delta_weight * 0.1));
+				learnNeuron(currentConnection->getNeuronFrom(), delta_weight);
+				begin2++;
+			}
+		}
 		begin++;
 	}
 }

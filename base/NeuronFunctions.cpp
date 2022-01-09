@@ -6,15 +6,15 @@
 
 double	NeuronFunctions::getDelta(double expectation, double result)
 {
-	return (result - expectation);
+	return (expectation - result);
 }
 
-double	NeuronFunctions::getWeightDelta(double delta, double weight)
+double	NeuronFunctions::getDeltaSimpleWeight(double delta, double weight)
 {
 	return (delta * weight);
 }
 
-double	NeuronFunctions::getNewWeight(double weight_delta, double learn_rate)
+double	NeuronFunctions::getDeltaDifficultWeight(double weight_delta, double learn_rate)
 {
 	return (weight_delta * learn_rate);
 }

@@ -19,6 +19,7 @@ private:
 	double	status;
 	bool	is_available;
 	t_VectorNeuronToConnections connections;
+	t_VectorNeuronToConnections	&getAllConnections();
 private:
 	bool	isAvailable() const;
 	void	setAvailable(bool is_available);

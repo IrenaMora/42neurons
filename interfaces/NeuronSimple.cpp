@@ -9,6 +9,11 @@ NeuronSimple::NeuronSimple(double status) : is_available(true)
 	setStatus(status);
 }
 
+t_VectorNeuronToConnections	&NeuronSimple::getAllConnections()
+{
+	return (this->connections);
+}
+
 bool	NeuronSimple::isAvailable() const
 {
 	return (this->is_available);
