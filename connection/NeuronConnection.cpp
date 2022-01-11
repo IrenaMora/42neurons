@@ -4,7 +4,7 @@
 
 #include "NeuronConnection.hpp"
 
-NeuronConnection::NeuronConnection(NeuronSimple &from, NeuronSimple &to, double weight) : from(&from), to(&to), weight(weight) {}
+NeuronConnection::NeuronConnection(NeuronSimple &from, NeuronSimple &to, double learning_rate, double weight) : from(&from), to(&to), learning_rate(learning_rate), weight(weight) {}
 
 double	NeuronConnection::getWeight() const
 {
@@ -14,6 +14,16 @@ double	NeuronConnection::getWeight() const
 void	NeuronConnection::setWeight(double weight)
 {
 	this->weight = weight;
+}
+
+double	NeuronConnection::getLearningRate() const
+{
+	return (this->learning_rate);
+}
+
+void	NeuronConnection::setLearningRate(double learning_rate)
+{
+	this->learning_rate = learning_rate;
 }
 
 NeuronSimple	&NeuronConnection::getNeuronFrom() const

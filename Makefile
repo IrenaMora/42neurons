@@ -10,7 +10,7 @@ all: $(NAME)
 
 $(NAME): $(CPPFILES) $(HPPFILES)
 	@clang++ -c $(CPPFILES) -Ibase -Iconnection -Iexceptions -Iinterfaces -Inetwork -Ineurons -std=c++11 -O1
-	@clang++ $(OBJFILES) -o $(NAME)  -std=c++11 -O1
+	@clang++ $(OBJFILES) -o $(NAME) -std=c++11 -O1
 
 clean:
 	@rm -rf $(OBJFILES)

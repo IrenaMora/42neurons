@@ -10,12 +10,15 @@ class NeuronConnection
 {
 private:
 	double			weight;
+	double			learning_rate;
 	NeuronSimple	*from;
 	NeuronSimple	*to;
 public:
-	NeuronConnection(NeuronSimple &from, NeuronSimple &to, double weight = 0);
+	NeuronConnection(NeuronSimple &from, NeuronSimple &to, double learning_rate = 0, double weight = 0);
 	double	getWeight() const;
 	void	setWeight(double weight);
+	double	getLearningRate() const;
+	void	setLearningRate(double learning_rate);
 	NeuronSimple	&getNeuronFrom() const;
 	void	setNeuronFrom(NeuronSimple &from);
 	NeuronSimple	&getNeuronTo() const;

@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <vector>
 #include "../neurons/NeuronIn.hpp"
 #include "../neurons/NeuronDeep.hpp"
 #include "../neurons/NeuronOut.hpp"
@@ -18,7 +19,7 @@ private:
 	t_VectorToNeurons	neurons;
 	t_VectorNeuronConnections	connections;
 private:
-	void	addConnection(NeuronSimple &from, NeuronSimple &to, double weight = 0);
+	void	addConnection(NeuronSimple &from, NeuronSimple &to, double learning_rate = 0.001, double weight = 0);
 	void	removeAllConnections(NeuronSimple &neuron);
 	bool	isNeuronIn(NeuronSimple &neuron);
 	bool	isNeuronDeep(NeuronSimple &neuron);
@@ -30,8 +31,9 @@ public:
 	~NeuronNetwork();
 	bool	isExistNeuron(NeuronSimple &neuron);
 	void	addNeuron(NeuronSimple &neuron);
+	void	addNeurons(vector<NeuronIn> &neurons);
 	void	removeNeuron(NeuronSimple &neuron);
-	void	createConnection(NeuronSimple &from, NeuronSimple &to, double weight = 0);
+	void	createConnection(NeuronSimple &from, NeuronSimple &to, double learning_rate = 0.001, double weight = 0);
 	size_t	getCountNeurons();
 	size_t	getCountConnections();
 	void	compute();
