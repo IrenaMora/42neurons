@@ -3,14 +3,18 @@
 //
 
 #include <cmath>
+#include "NeuronBase.hpp"
+#include "../exceptions/NeuronException.hpp"
 
-class NeuronFunctions {
-public:
-	static double	getDelta(double expectation, double result);
-	static double	getDeltaSimpleWeight(double delta, double weight); //TODO: set new body of function
-	static double	getDeltaDifficultWeight(double weight_delta, double learn_rate); //TODO: set new body of function
-	static double	getSigma(double value);
-	static double	getDerivativeSigma(double value);
+
+class NeuronFunctions
+{
+private:
+	static double	getSigmoid(double value);
+	static double	getDerivativeSigmoid(double value);
 	static double	getReLU(double value);
 	static double	getDerivativeReLU(double value);
+public:
+	static double	getCorrection(double value, FunctionType function_type);
+	static double	getDerivativeCorrection(double value, FunctionType function_type);
 };

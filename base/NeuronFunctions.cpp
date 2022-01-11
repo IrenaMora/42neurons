@@ -4,29 +4,14 @@
 
 #include "NeuronFunctions.hpp"
 
-double	NeuronFunctions::getDelta(double expectation, double result)
-{
-	return (expectation - result);
-}
-
-double	NeuronFunctions::getDeltaSimpleWeight(double delta, double weight)
-{
-	return (delta * weight);
-}
-
-double	NeuronFunctions::getDeltaDifficultWeight(double weight_delta, double learn_rate)
-{
-	return (weight_delta * learn_rate);
-}
-
-double	NeuronFunctions::getSigma(double value)
+double	NeuronFunctions::getSigmoid(double value)
 {
 	return (1 / (1 + exp(-value)));
 }
 
-double	NeuronFunctions::getDerivativeSigma(double value)
+double	NeuronFunctions::getDerivativeSigmoid(double value)
 {
-	double sigma = getSigma(value);
+	double sigma = getSigmoid(value);
 	return (sigma * (1 - sigma));
 }
 
@@ -38,4 +23,25 @@ double	NeuronFunctions::getReLU(double value)
 double	NeuronFunctions::getDerivativeReLU(double value)
 {
 	return (1);
+}
+
+double	NeuronFunctions::getCorrection(double value, FunctionType function_type)
+{
+	if (function_type == FunctionType::SIGMOID)
+		return (NeuronFunctions::getSigmoid(value));
+	else if (function_type == FunctionType::RELU)
+		return (NeuronFunctions::getReLU(value));
+	else
+		throw (NeuronException(0, "Unknown type of function"));
+
+}
+
+double	NeuronFunctions::getDerivativeCorrection(double value, FunctionType function_type)
+{
+	if (function_type == FunctionType::SIGMOID)
+		return (NeuronFunctions::getDerivativeSigmoid(value));
+	else if (function_type == FunctionType::RELU)
+		return (NeuronFunctions::getDerivativeReLU(value));
+	else
+		throw (NeuronException(0, "Unknown type of function"));
 }

@@ -81,21 +81,20 @@ int	main()
 		network->addNeuron(in_first);
 		network->addNeuron(in_second);
 		network->addNeuron(out_first);
-		network->createConnection(in_first, out_first, 0.001);
-		network->createConnection(in_second, out_first, 0.001);
+		network->createConnection(in_first, out_first, FunctionType::RELU, 0.001);
+		network->createConnection(in_second, out_first, FunctionType::RELU, 0.001);
 	}
 	catch (NeuronException &e)
 	{
 		cout << e.getMessage() << endl;
 	}
 
-	for (int i = 1; i < 100000; i++)
+	for (int i = 0; i < 1500; i++)
 	{
 		int rand = getRandom();
 		in_first.setStatus(rand);
-		out_first.setExpectedStatus(rand + 10.000);
+		out_first.setExpectedStatus(rand * 0.75);
 		network->learn();
-		network->compute();
 		cout << "Learning №" << i + 1 << ". Expected " << out_first.getExpectedStatus() << ", result " << out_first.getStatus() << endl;
 	}
 

@@ -4,10 +4,19 @@
 
 #pragma once
 
+#include <set>
+
+using namespace std;
+
+enum FunctionType
+{
+	SIGMOID,
+	RELU
+};
+
 class NeuronSimple;
 class NeuronConnection;
 
-#include <set>
 
 typedef set<NeuronSimple *> t_VectorToNeurons;
 typedef set<NeuronConnection> t_VectorNeuronConnections;
