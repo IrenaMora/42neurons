@@ -2,7 +2,7 @@
 
 **What is this library?**
 
-This library can help you free design your own neural network like you want.
+This library can help you freely develop your own neural network the way you want.
 
 **What language library use?**
 
