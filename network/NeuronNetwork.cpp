@@ -162,19 +162,6 @@ void	NeuronNetwork::addNeuron(NeuronSimple &neuron)
 	this->neurons.insert(&neuron);
 }
 
-template<class T>
-void	NeuronNetwork::addNeurons(T &container_neurons)
-{
-	vector<NeuronIn>::iterator begin = container_neurons.begin();
-	vector<NeuronIn>::iterator end = container_neurons.end();
-
-	while (begin != end)
-	{
-		addNeuron(*begin);
-		begin++;
-	}
-}
-
 void	NeuronNetwork::removeNeuron(NeuronSimple &neuron)
 {
 	t_VectorToNeurons::iterator begin;
