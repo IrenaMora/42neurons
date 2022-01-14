@@ -39,7 +39,8 @@ All examples - from simple to complex - are in the folder examples
 	/* Add outgoing neuron */
 	network.addNeuron(out_first);
 	
-	/* Create connection between incoming and outgoing neurons. Set function RELU and learning rate 0.01 */
+	/* Create connection between incoming and outgoing neurons */
+	/* Set function RELU and learning rate 0.01 */
 	network.createConnect(in_first, out_first, FunctionType::RELU, 0.01);
 	
 	/* Compute neural network */
