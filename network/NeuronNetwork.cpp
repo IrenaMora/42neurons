@@ -209,6 +209,11 @@ void	NeuronNetwork::createConnection(NeuronSimple &from, NeuronSimple &to, Funct
 	addConnection(from, to, function_type, learning_rate, weight);
 }
 
+void	NeuronNetwork::createConnection(NeuronSimple &from, NeuronSimple &to, FunctionType function_type, double learning_rate)
+{
+	createConnection(from, to, function_type, learning_rate, NeuronFunctions::getRandomWeight());
+}
+
 size_t	NeuronNetwork::getCountNeurons()
 {
 	return (this->neurons.size());
