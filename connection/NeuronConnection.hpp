@@ -16,7 +16,7 @@ private:
 	NeuronSimple	*from;
 	NeuronSimple	*to;
 public:
-	NeuronConnection(NeuronSimple &from, NeuronSimple &to, FunctionType function_type, double learning_rate, double weight = 0.5);
+	NeuronConnection(NeuronSimple &from, NeuronSimple &to, FunctionType function_type, double learning_rate, double weight);
 	double	getWeight() const;
 	void	setWeight(double weight);
 	double	getLearningRate() const;
