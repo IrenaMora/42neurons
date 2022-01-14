@@ -30,7 +30,7 @@ double	NeuronFunctions::getRandomWeight()
 	struct timeval time;
 	gettimeofday(&time, NULL);
 	srand(time.tv_sec * time.tv_usec);
-	return ((rand() % 100000) / 100000);
+	return (static_cast<double>(rand() % 1000000) / 1000000);
 }
 
 double	NeuronFunctions::getCorrection(double value, FunctionType function_type)
