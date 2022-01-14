@@ -33,7 +33,7 @@ public:
 	~NeuronNetwork();
 	bool isExistNeuron(NeuronSimple &neuron);
 	void addNeuron(NeuronSimple &neuron);
-	void addNeurons(vector<NeuronIn> &neurons);
+	template<class T> void addNeurons(T &container_neurons);
 	void removeNeuron(NeuronSimple &neuron);
 	void createConnection(NeuronSimple &from, NeuronSimple &to, FunctionType function_type, double learning_rate);
 	void createConnection(NeuronSimple &from, NeuronSimple &to, FunctionType function_type, double learning_rate, double weight);
