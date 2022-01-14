@@ -25,6 +25,14 @@ double	NeuronFunctions::getDerivativeReLU(double value)
 	return (1);
 }
 
+double	NeuronFunctions::getRandomWeight()
+{
+	struct timeval time;
+	gettimeofday(&time, NULL);
+	srand(time.tv_sec * time.tv_usec);
+	return ((rand() % 100000) / 100000);
+}
+
 double	NeuronFunctions::getCorrection(double value, FunctionType function_type)
 {
 	if (function_type == FunctionType::SIGMOID)
