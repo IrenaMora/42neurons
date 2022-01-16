@@ -36,8 +36,8 @@ public:
 	template<typename T>
 	void addNeurons(T &container_neurons)
 	{
-		vector<NeuronIn>::iterator begin = container_neurons.begin();
-		vector<NeuronIn>::iterator end = container_neurons.end();
+		typename T::iterator begin = container_neurons.begin();
+		typename T::iterator end = container_neurons.end();
 
 		while (begin != end)
 		{
