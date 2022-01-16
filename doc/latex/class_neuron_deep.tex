@@ -1,0 +1,27 @@
+\hypertarget{class_neuron_deep}{}\doxysection{Neuron\+Deep Class Reference}
+\label{class_neuron_deep}\index{NeuronDeep@{NeuronDeep}}
+
+
+It is a type of neuron. You don\textquotesingle{}t need to work with its status (value), unlike {\bfseries{\mbox{\hyperlink{class_neuron_in}{Neuron\+In}}}}. Create it, add it to your neural network and make the necessary connections with this class, and everything will work for you.  
+
+
+
+
+{\ttfamily \#include $<$42neurons.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_neuron_deep_a4231167f36583ea6de4b2d920603f49d}\label{class_neuron_deep_a4231167f36583ea6de4b2d920603f49d}} 
+{\bfseries Neuron\+Deep} ()
+\begin{DoxyCompactList}\small\item\em Constructor for this type of neuron. It does not take parameters, unlike the {\bfseries{\mbox{\hyperlink{class_neuron_in}{Neuron\+In}}}} class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_neuron_deep_aba0d81d859319e6189b9b8af63a64b9a}\label{class_neuron_deep_aba0d81d859319e6189b9b8af63a64b9a}} 
+double {\bfseries get\+Status} () const
+\begin{DoxyCompactList}\small\item\em The function returns the status (value) of this neuron. It defaults to 0 and you cannot set it yourself. The neural network, when executing the {\bfseries{compute}} and {\bfseries{learn}} functions from the {\bfseries{Neuron\+Network}} class, does this for you. You can use this feature for educational purposes and when trying to design a neural network. After design, it is unnecessary. Works in the same way as the function of the same name in the {\bfseries{\mbox{\hyperlink{class_neuron_in}{Neuron\+In}}}} class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_neuron_deep_a602e72ceee72d01e22ef1edacaaa6657}\label{class_neuron_deep_a602e72ceee72d01e22ef1edacaaa6657}} 
+size\+\_\+t {\bfseries get\+Count\+Connections} ()
+\begin{DoxyCompactList}\small\item\em Show the number of connections in which the neuron participates. If the {\bfseries{add\+Connection}} function from {\bfseries{Neuron\+Network}} class was applied to this neuron 2 times, this function will return the number 2; if the function was not applied, returns 0. Works in the same way as the function of the same name in the {\bfseries{\mbox{\hyperlink{class_neuron_in}{Neuron\+In}}}} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+It is a type of neuron. You don\textquotesingle{}t need to work with its status (value), unlike {\bfseries{\mbox{\hyperlink{class_neuron_in}{Neuron\+In}}}}. Create it, add it to your neural network and make the necessary connections with this class, and everything will work for you. 

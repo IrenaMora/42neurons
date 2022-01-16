@@ -1,0 +1,38 @@
+\hypertarget{_neuron_connection_8hpp_source}{}\doxysection{Neuron\+Connection.\+hpp}
+\label{_neuron_connection_8hpp_source}\index{/Users/imora/Desktop/42neurons\_new/connection/NeuronConnection.hpp@{/Users/imora/Desktop/42neurons\_new/connection/NeuronConnection.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by Irena Mora on 1/5/22.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}../base/NeuronBase.hpp"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}../interfaces/NeuronSimple.hpp"{}}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{class }\mbox{\hyperlink{class_neuron_connection}{NeuronConnection}}}
+\DoxyCodeLine{11 \{}
+\DoxyCodeLine{12 \textcolor{keyword}{private}:}
+\DoxyCodeLine{13     \textcolor{keywordtype}{double}          weight;}
+\DoxyCodeLine{14     \textcolor{keywordtype}{double}          learning\_rate;}
+\DoxyCodeLine{15     FunctionType    function\_type;}
+\DoxyCodeLine{16     \mbox{\hyperlink{class_neuron_simple}{NeuronSimple}}    *from;}
+\DoxyCodeLine{17     \mbox{\hyperlink{class_neuron_simple}{NeuronSimple}}    *to;}
+\DoxyCodeLine{18 \textcolor{keyword}{public}:}
+\DoxyCodeLine{19     \mbox{\hyperlink{class_neuron_connection}{NeuronConnection}}(\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&from, \mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&to, FunctionType function\_type, \textcolor{keywordtype}{double} learning\_rate, \textcolor{keywordtype}{double} weight);}
+\DoxyCodeLine{20     \textcolor{keywordtype}{double}  getWeight() \textcolor{keyword}{const};}
+\DoxyCodeLine{21     \textcolor{keywordtype}{void}    setWeight(\textcolor{keywordtype}{double} weight);}
+\DoxyCodeLine{22     \textcolor{keywordtype}{double}  getLearningRate() \textcolor{keyword}{const};}
+\DoxyCodeLine{23     \textcolor{keywordtype}{void}    setLearningRate(\textcolor{keywordtype}{double} learning\_rate);}
+\DoxyCodeLine{24     FunctionType    getFunctionType() \textcolor{keyword}{const};}
+\DoxyCodeLine{25     \textcolor{keywordtype}{void}    setFunctionType(FunctionType function\_type);}
+\DoxyCodeLine{26     \mbox{\hyperlink{class_neuron_simple}{NeuronSimple}}    \&getNeuronFrom() \textcolor{keyword}{const};}
+\DoxyCodeLine{27     \textcolor{keywordtype}{void}    setNeuronFrom(\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&from);}
+\DoxyCodeLine{28     \mbox{\hyperlink{class_neuron_simple}{NeuronSimple}}    \&getNeuronTo() \textcolor{keyword}{const};}
+\DoxyCodeLine{29     \textcolor{keywordtype}{void}    setNeuronTo(\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&to);}
+\DoxyCodeLine{30     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isAlreadyConnected(t\_SetNeuronConnections \&connections, \mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&from, \mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&to);}
+\DoxyCodeLine{31     \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} operator < (\textcolor{keyword}{const} \mbox{\hyperlink{class_neuron_connection}{NeuronConnection}} \&first, \textcolor{keyword}{const} \mbox{\hyperlink{class_neuron_connection}{NeuronConnection}} \&second);}
+\DoxyCodeLine{32 \};}
+
+\end{DoxyCode}

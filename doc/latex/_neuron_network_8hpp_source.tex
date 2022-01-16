@@ -1,0 +1,61 @@
+\hypertarget{_neuron_network_8hpp_source}{}\doxysection{Neuron\+Network.\+hpp}
+\label{_neuron_network_8hpp_source}\index{/Users/imora/Desktop/42neurons\_new/network/NeuronNetwork.hpp@{/Users/imora/Desktop/42neurons\_new/network/NeuronNetwork.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by Irena Mora on 1/4/22.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}../neurons/NeuronIn.hpp"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}../neurons/NeuronDeep.hpp"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}../neurons/NeuronOut.hpp"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}../exceptions/NeuronException.hpp"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}../base/NeuronBase.hpp"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}../base/NeuronFunctions.hpp"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}../connection/NeuronConnection.hpp"{}}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{class }\mbox{\hyperlink{class_neuron_network}{NeuronNetwork}}}
+\DoxyCodeLine{17 \{}
+\DoxyCodeLine{18 \textcolor{keyword}{private}:}
+\DoxyCodeLine{19     t\_SetToNeurons neurons;}
+\DoxyCodeLine{20     t\_SetNeuronConnections connections;}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{keyword}{private}:}
+\DoxyCodeLine{23     \textcolor{keywordtype}{void} addConnection(\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&from, \mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&to, FunctionType function\_type, \textcolor{keywordtype}{double} learning\_rate, \textcolor{keywordtype}{double} weight);}
+\DoxyCodeLine{24     \textcolor{keywordtype}{void} removeAllConnections(\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&neuron);}
+\DoxyCodeLine{25     \textcolor{keywordtype}{bool} isNeuronIn(\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&neuron);}
+\DoxyCodeLine{26     \textcolor{keywordtype}{bool} isNeuronDeep(\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&neuron);}
+\DoxyCodeLine{27     \textcolor{keywordtype}{bool} isNeuronOut(\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&neuron);}
+\DoxyCodeLine{28     \textcolor{keywordtype}{void} disableAllNeurons();}
+\DoxyCodeLine{29     \textcolor{keywordtype}{void} computeNeuron(\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} *next, \textcolor{keywordtype}{double} resume);}
+\DoxyCodeLine{30     \textcolor{keywordtype}{void} learnNeuron(\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&neuron, \textcolor{keywordtype}{double} sigma\_weight);}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{keyword}{public}:}
+\DoxyCodeLine{33     \mbox{\hyperlink{class_neuron_network}{\string~NeuronNetwork}}();}
+\DoxyCodeLine{34     \textcolor{keywordtype}{bool} isExistNeuron(\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&neuron);}
+\DoxyCodeLine{35     \textcolor{keywordtype}{void} addNeuron(\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&neuron);}
+\DoxyCodeLine{36     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{37     \textcolor{keywordtype}{void} addNeurons(T \&container\_neurons)}
+\DoxyCodeLine{38     \{}
+\DoxyCodeLine{39         \textcolor{keyword}{typename} T::iterator begin = container\_neurons.begin();}
+\DoxyCodeLine{40         \textcolor{keyword}{typename} T::iterator end = container\_neurons.end();}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         \textcolor{keywordflow}{while} (begin != end)}
+\DoxyCodeLine{43         \{}
+\DoxyCodeLine{44             addNeuron(*begin);}
+\DoxyCodeLine{45             begin++;}
+\DoxyCodeLine{46         \}}
+\DoxyCodeLine{47     \}}
+\DoxyCodeLine{48     \textcolor{keywordtype}{void} removeNeuron(\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&neuron);}
+\DoxyCodeLine{49     \textcolor{keywordtype}{void} createConnection(\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&from, \mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&to, FunctionType function\_type, \textcolor{keywordtype}{double} learning\_rate);}
+\DoxyCodeLine{50     \textcolor{keywordtype}{void} createConnection(\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&from, \mbox{\hyperlink{class_neuron_simple}{NeuronSimple}} \&to, FunctionType function\_type, \textcolor{keywordtype}{double} learning\_rate, \textcolor{keywordtype}{double} weight);}
+\DoxyCodeLine{51     \textcolor{keywordtype}{size\_t} getCountNeurons();}
+\DoxyCodeLine{52     \textcolor{keywordtype}{size\_t} getCountConnections();}
+\DoxyCodeLine{53     \textcolor{keywordtype}{void} compute();}
+\DoxyCodeLine{54     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_neuron_network_a26f0ade49aaf67ea160d88ee5481c5a1}{learn}}();}
+\DoxyCodeLine{55 \};}
+
+\end{DoxyCode}

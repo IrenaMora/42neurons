@@ -9,3 +9,14 @@
 #include "neurons/NeuronDeep.hpp"
 #include "neurons/NeuronOut.hpp"
 #include "exceptions/NeuronException.hpp"
+
+class NeuronIn
+{
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// \brief The constructor allows you to set the default status (value) of the neuron
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	NeuronIn(double status = 0);
+	double	getStatus() const;
+	void	setStatus(double status);
+	size_t	getCountConnections();
+};

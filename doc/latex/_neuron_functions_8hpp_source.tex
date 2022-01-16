@@ -1,0 +1,30 @@
+\hypertarget{_neuron_functions_8hpp_source}{}\doxysection{Neuron\+Functions.\+hpp}
+\label{_neuron_functions_8hpp_source}\index{/Users/imora/Desktop/42neurons\_new/base/NeuronFunctions.hpp@{/Users/imora/Desktop/42neurons\_new/base/NeuronFunctions.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by Irena Mora on 1/5/22.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <sys/time.h>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}NeuronBase.hpp"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}../exceptions/NeuronException.hpp"{}}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{class }\mbox{\hyperlink{class_neuron_functions}{NeuronFunctions}}}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15 \textcolor{keyword}{private}:}
+\DoxyCodeLine{16     \textcolor{keyword}{static} \textcolor{keywordtype}{double}   getSigmoid(\textcolor{keywordtype}{double} value);}
+\DoxyCodeLine{17     \textcolor{keyword}{static} \textcolor{keywordtype}{double}   getDerivativeSigmoid(\textcolor{keywordtype}{double} value);}
+\DoxyCodeLine{18     \textcolor{keyword}{static} \textcolor{keywordtype}{double}   getReLU(\textcolor{keywordtype}{double} value);}
+\DoxyCodeLine{19     \textcolor{keyword}{static} \textcolor{keywordtype}{double}   getDerivativeReLU(\textcolor{keywordtype}{double} value);}
+\DoxyCodeLine{20 \textcolor{keyword}{public}:}
+\DoxyCodeLine{21     \textcolor{keyword}{static} \textcolor{keywordtype}{double}   getRandomWeight();}
+\DoxyCodeLine{22     \textcolor{keyword}{static} \textcolor{keywordtype}{double}   getCorrection(\textcolor{keywordtype}{double} value, FunctionType function\_type);}
+\DoxyCodeLine{23     \textcolor{keyword}{static} \textcolor{keywordtype}{double}   getDerivativeCorrection(\textcolor{keywordtype}{double} value, FunctionType function\_type);}
+\DoxyCodeLine{24 \};}
+
+\end{DoxyCode}

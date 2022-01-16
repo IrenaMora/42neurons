@@ -1,0 +1,47 @@
+{\bfseries{What is this library?}}
+
+This library can help you freely develop your own neural network the way you want.
+
+{\bfseries{What language library use?}}
+
+The library is written in pure C++ without additional libraries.
+
+{\bfseries{It is fast?}}
+
+Yes! Library wirtten in pure C++ and therefore has a high performance.
+
+{\bfseries{Why I must use it?}}
+
+You can create neural networks the way you want by connecting neurons in any order on your own. This makes the library flexible. You also will understand more about how neural network works.
+
+{\bfseries{Is this difficult to use?}}
+
+No. The library has several classes close to each other containing 2-\/3 functions.
+
+{\bfseries{Where can I get examples?}}
+
+All examples -\/ from simple to complex -\/ are in the folder examples
+
+{\bfseries{I want to see a simple neural network with this library!}} \begin{DoxyVerb}/* Creating incoming neuron */
+NeuronIn in_first; 
+/* Creating outgoing neuron */
+NeuronOut out_first;
+/* Create neural network */
+NeuronNetwork network;
+
+/* Add incoming neuron to neural network */
+network.addNeuron(in_first);
+/* Add outgoing neuron */
+network.addNeuron(out_first);
+
+/* Create connection between incoming and outgoing neurons */
+/* Set function RELU and learning rate 0.01 */
+network.createConnect(in_first, out_first, FunctionType::RELU, 0.01);
+
+/* Compute neural network */
+network.compute(); 
+
+/* Write result */
+cout << out_first.getStatus() << endl;
+\end{DoxyVerb}
+ 

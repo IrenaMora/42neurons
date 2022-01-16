@@ -1,0 +1,42 @@
+\hypertarget{_neuron_simple_8hpp_source}{}\doxysection{Neuron\+Simple.\+hpp}
+\label{_neuron_simple_8hpp_source}\index{/Users/imora/Desktop/42neurons\_new/interfaces/NeuronSimple.hpp@{/Users/imora/Desktop/42neurons\_new/interfaces/NeuronSimple.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by Irena Mora on 1/4/22.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}../exceptions/NeuronException.hpp"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}../base/NeuronBase.hpp"{}}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{class }\mbox{\hyperlink{class_neuron_network}{NeuronNetwork}};}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{class }\mbox{\hyperlink{class_neuron_simple}{NeuronSimple}}}
+\DoxyCodeLine{17 \{}
+\DoxyCodeLine{18 \textcolor{keyword}{private}:}
+\DoxyCodeLine{19     \textcolor{keywordtype}{double}  status;}
+\DoxyCodeLine{20     \textcolor{keywordtype}{bool}    is\_available;}
+\DoxyCodeLine{21     t\_SetNeuronToConnections connections;}
+\DoxyCodeLine{22     t\_SetNeuronToConnections    \&getAllConnections();}
+\DoxyCodeLine{23 \textcolor{keyword}{private}:}
+\DoxyCodeLine{24     \textcolor{keywordtype}{bool}    isAvailable() \textcolor{keyword}{const};}
+\DoxyCodeLine{25     \textcolor{keywordtype}{void}    setAvailable(\textcolor{keywordtype}{bool} is\_available);}
+\DoxyCodeLine{26     \textcolor{keywordtype}{bool}    isExistConnection(\mbox{\hyperlink{class_neuron_connection}{NeuronConnection}} \&connection) \textcolor{keyword}{const};}
+\DoxyCodeLine{27     \textcolor{keywordtype}{void}    addConnection(\mbox{\hyperlink{class_neuron_connection}{NeuronConnection}} \&connection);}
+\DoxyCodeLine{28     \textcolor{keywordtype}{void}    removeConnection(\mbox{\hyperlink{class_neuron_connection}{NeuronConnection}} \&connection);}
+\DoxyCodeLine{29 \textcolor{keyword}{public}:}
+\DoxyCodeLine{30     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_neuron_simple}{\string~NeuronSimple}}() \{\};}
+\DoxyCodeLine{31     \mbox{\hyperlink{class_neuron_simple}{NeuronSimple}}(\textcolor{keywordtype}{double} status = 0);}
+\DoxyCodeLine{32     \textcolor{keywordtype}{double}  getStatus() \textcolor{keyword}{const};}
+\DoxyCodeLine{33     \textcolor{keywordtype}{void}    setStatus(\textcolor{keywordtype}{double} status);}
+\DoxyCodeLine{34     \textcolor{keywordtype}{size\_t}  getCountConnections();}
+\DoxyCodeLine{35     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_neuron_network}{NeuronNetwork}};}
+\DoxyCodeLine{36 \};}
+
+\end{DoxyCode}
