@@ -9,7 +9,7 @@ NeuronSimple::NeuronSimple(double status) : is_available(true)
 	setStatus(status);
 }
 
-t_VectorNeuronToConnections	&NeuronSimple::getAllConnections()
+t_SetNeuronToConnections	&NeuronSimple::getAllConnections()
 {
 	return (this->connections);
 }
@@ -26,8 +26,8 @@ void	NeuronSimple::setAvailable(bool is_available)
 
 bool	NeuronSimple::isExistConnection(NeuronConnection &connection) const
 {
-	t_VectorNeuronToConnections::const_iterator begin = this->connections.cbegin(); 
-	t_VectorNeuronToConnections::const_iterator end = this->connections.cend();
+	t_SetNeuronToConnections::const_iterator begin = this->connections.cbegin();
+	t_SetNeuronToConnections::const_iterator end = this->connections.cend();
 
 	while (begin != end)
 	{
@@ -47,8 +47,8 @@ void	NeuronSimple::addConnection(NeuronConnection &connection)
 
 void	NeuronSimple::removeConnection(NeuronConnection &connection)
 {
-	t_VectorNeuronToConnections::iterator begin = this->connections.begin(); 
-	t_VectorNeuronToConnections::iterator end = this->connections.end();
+	t_SetNeuronToConnections::iterator begin = this->connections.begin();
+	t_SetNeuronToConnections::iterator end = this->connections.end();
 
 	while (begin != end)
 	{

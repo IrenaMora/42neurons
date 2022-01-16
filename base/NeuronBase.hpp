@@ -18,6 +18,6 @@ class NeuronSimple;
 class NeuronConnection;
 
 
-typedef set<NeuronSimple *> t_VectorToNeurons;
-typedef set<NeuronConnection> t_VectorNeuronConnections;
-typedef set<NeuronConnection *> t_VectorNeuronToConnections;
+typedef set<NeuronSimple *> t_SetToNeurons;
+typedef set<NeuronConnection> t_SetNeuronConnections;
+typedef set<NeuronConnection *> t_SetNeuronToConnections;

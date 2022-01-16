@@ -27,6 +27,6 @@ public:
 	void	setNeuronFrom(NeuronSimple &from);
 	NeuronSimple	&getNeuronTo() const;
 	void	setNeuronTo(NeuronSimple &to);
-	static bool	isAlreadyConnected(t_VectorNeuronConnections &connections, NeuronSimple &from, NeuronSimple &to);
+	static bool	isAlreadyConnected(t_SetNeuronConnections &connections, NeuronSimple &from, NeuronSimple &to);
 	friend bool	operator < (const NeuronConnection &first, const NeuronConnection &second);
 };

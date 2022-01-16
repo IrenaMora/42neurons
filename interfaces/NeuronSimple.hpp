@@ -18,8 +18,8 @@ class NeuronSimple
 private:
 	double	status;
 	bool	is_available;
-	t_VectorNeuronToConnections connections;
-	t_VectorNeuronToConnections	&getAllConnections();
+	t_SetNeuronToConnections connections;
+	t_SetNeuronToConnections	&getAllConnections();
 private:
 	bool	isAvailable() const;
 	void	setAvailable(bool is_available);

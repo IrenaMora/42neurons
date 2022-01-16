@@ -16,8 +16,8 @@
 class NeuronNetwork
 {
 private:
-	t_VectorToNeurons neurons;
-	t_VectorNeuronConnections connections;
+	t_SetToNeurons neurons;
+	t_SetNeuronConnections connections;
 
 private:
 	void addConnection(NeuronSimple &from, NeuronSimple &to, FunctionType function_type, double learning_rate, double weight);

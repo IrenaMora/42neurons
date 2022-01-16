@@ -6,8 +6,8 @@
 
 NeuronNetwork::~NeuronNetwork()
 {
-	t_VectorToNeurons::iterator begin = this->neurons.begin();
-	t_VectorToNeurons::iterator end = this->neurons.end();
+	t_SetToNeurons::iterator begin = this->neurons.begin();
+	t_SetToNeurons::iterator end = this->neurons.end();
 
 	while (begin != end)
 	{
@@ -19,7 +19,7 @@ NeuronNetwork::~NeuronNetwork()
 
 void	NeuronNetwork::addConnection(NeuronSimple &from, NeuronSimple &to, FunctionType function_type, double learning_rate, double weight)
 {
-	t_VectorNeuronConnections::iterator current = this->connections.insert(NeuronConnection(from, to, function_type, learning_rate, weight)).first;
+	t_SetNeuronConnections::iterator current = this->connections.insert(NeuronConnection(from, to, function_type, learning_rate, weight)).first;
 	from.addConnection(const_cast<NeuronConnection &>(*current));
 	to.addConnection(const_cast<NeuronConnection &>(*current));
 }
@@ -31,8 +31,8 @@ void	NeuronNetwork::removeAllConnections(NeuronSimple &neuron)
 
 	if (!isExistNeuron(neuron))
 		throw (NeuronException(0, "The neuron is not exist in this neural network"));
-	t_VectorNeuronToConnections::iterator begin = neuron.getAllConnections().begin();
-	t_VectorNeuronToConnections::iterator end = neuron.getAllConnections().end();
+	t_SetNeuronToConnections::iterator begin = neuron.getAllConnections().begin();
+	t_SetNeuronToConnections::iterator end = neuron.getAllConnections().end();
 	while (begin != end)
 	{
 		currentConnection = *begin;
@@ -85,8 +85,8 @@ bool	NeuronNetwork::isNeuronOut(NeuronSimple &neuron)
 
 void	NeuronNetwork::disableAllNeurons()
 {
-	t_VectorToNeurons::iterator begin = this->neurons.begin();
-	t_VectorToNeurons::iterator end = this->neurons.end();
+	t_SetToNeurons::iterator begin = this->neurons.begin();
+	t_SetToNeurons::iterator end = this->neurons.end();
 
 	while (begin != end)
 	{
@@ -106,8 +106,8 @@ void	NeuronNetwork::computeNeuron(NeuronSimple *next, double resume)
 		next->setStatus(next->getStatus() + resume);
 	if (isNeuronOut(*next))
 		return ;
-	t_VectorNeuronToConnections::iterator begin = next->getAllConnections().begin();
-	t_VectorNeuronToConnections::iterator end = next->getAllConnections().end();
+	t_SetNeuronToConnections::iterator begin = next->getAllConnections().begin();
+	t_SetNeuronToConnections::iterator end = next->getAllConnections().end();
 	while (begin != end)
 	{
 		currentConnection = *begin;
@@ -122,8 +122,8 @@ void	NeuronNetwork::learnNeuron(NeuronSimple &neuron, double sigma_weight)
 {
 	double delta_current_weight;
 	NeuronConnection *currentConnection;
-	t_VectorNeuronToConnections::iterator begin = neuron.getAllConnections().begin();
-	t_VectorNeuronToConnections::iterator end = neuron.getAllConnections().end();
+	t_SetNeuronToConnections::iterator begin = neuron.getAllConnections().begin();
+	t_SetNeuronToConnections::iterator end = neuron.getAllConnections().end();
 
 	while (begin != end)
 	{
@@ -140,8 +140,8 @@ void	NeuronNetwork::learnNeuron(NeuronSimple &neuron, double sigma_weight)
 
 bool	NeuronNetwork::isExistNeuron(NeuronSimple &neuron)
 {
-	t_VectorToNeurons::iterator begin = this->neurons.begin();
-	t_VectorToNeurons ::iterator end = this->neurons.end();
+	t_SetToNeurons::iterator begin = this->neurons.begin();
+	t_SetToNeurons ::iterator end = this->neurons.end();
 
 	while (begin != end)
 	{
@@ -164,8 +164,8 @@ void	NeuronNetwork::addNeuron(NeuronSimple &neuron)
 
 void	NeuronNetwork::removeNeuron(NeuronSimple &neuron)
 {
-	t_VectorToNeurons::iterator begin;
-	t_VectorToNeurons::iterator end;
+	t_SetToNeurons::iterator begin;
+	t_SetToNeurons::iterator end;
 
 	if (neuron.isAvailable())
 		throw (NeuronException(0, "The neuron does not use in this neural network"));
@@ -214,8 +214,8 @@ size_t	NeuronNetwork::getCountConnections()
 
 void	NeuronNetwork::compute()
 {
-	t_VectorToNeurons::iterator begin = this->neurons.begin();
-	t_VectorToNeurons::iterator end = this->neurons.end();
+	t_SetToNeurons::iterator begin = this->neurons.begin();
+	t_SetToNeurons::iterator end = this->neurons.end();
 
 	disableAllNeurons();
 	while (begin != end)
@@ -235,16 +235,16 @@ void	NeuronNetwork::learn()
 	NeuronConnection *currentConnection;
 
 	this->compute();
-	t_VectorToNeurons::iterator begin = this->neurons.begin();
-	t_VectorToNeurons::iterator end = this->neurons.end();
+	t_SetToNeurons::iterator begin = this->neurons.begin();
+	t_SetToNeurons::iterator end = this->neurons.end();
 	while (begin != end)
 	{
 		currentNeuron = *begin;
 		if (isNeuronOut(*currentNeuron))
 		{
 			delta = dynamic_cast<NeuronOut *>(currentNeuron)->getExpectedStatus() - currentNeuron->getStatus();
-			t_VectorNeuronToConnections::iterator begin2 = currentNeuron->getAllConnections().begin();
-			t_VectorNeuronToConnections::iterator end2 = currentNeuron->getAllConnections().end();
+			t_SetNeuronToConnections::iterator begin2 = currentNeuron->getAllConnections().begin();
+			t_SetNeuronToConnections::iterator end2 = currentNeuron->getAllConnections().end();
 			while (begin2 != end2)
 			{
 				currentConnection = *begin2;

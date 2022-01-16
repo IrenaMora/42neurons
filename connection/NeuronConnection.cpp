@@ -56,10 +56,10 @@ void	NeuronConnection::setNeuronTo(NeuronSimple &to)
 	this->to = &to;
 }
 
-bool	NeuronConnection::isAlreadyConnected(t_VectorNeuronConnections &connections, NeuronSimple &from, NeuronSimple &to)
+bool	NeuronConnection::isAlreadyConnected(t_SetNeuronConnections &connections, NeuronSimple &from, NeuronSimple &to)
 {
-	t_VectorNeuronConnections::const_iterator begin = connections.cbegin();
-	t_VectorNeuronConnections::const_iterator end = connections.cend();
+	t_SetNeuronConnections::const_iterator begin = connections.cbegin();
+	t_SetNeuronConnections::const_iterator end = connections.cend();
 
 	while (begin != end)
 	{
