@@ -4,93 +4,155 @@
 
 #pragma once
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief This class allows you to create an input neuron where your input numeric data will be stored.
-/// The calculation of the neural network starts with these neurons.
-////////////////////////////////////////////////////////////////////////////////////////////////////
-class NeuronIn
+#include <set>
+#include <iostream>
+
+enum FunctionType
 {
+	SIGMOID,
+	RELU
+};
+
+class NeuronSimple;
+class NeuronConnection;
+
+typedef std::set<NeuronSimple *> t_SetToNeurons;
+typedef std::set<NeuronConnection> t_SetNeuronConnections;
+typedef std::set<NeuronConnection *> t_SetNeuronToConnections;
+
+class NeuronFunctions
+{
+private:
+	static double	getSigmoid(double value);
+	static double	getDerivativeSigmoid(double value);
+	static double	getReLU(double value);
+	static double	getDerivativeReLU(double value);
 public:
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	/// \brief The constructor allows you to set the default status (value) of the neuron.
-	/// \param status The default is set to 0. It is of type double.
-	/// For example, the value of "red" for a pixel from rgb (from 0 to 255)
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	NeuronIn(double status = 0);
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	/// \brief Get the status (value) of this neuron.
-	/// This status was set by you before.
-	/// The neural network cannot change it, because the neuron is the input.
-	////////////////////////////////////////////////////////////////////////////////////////////////////
+	static double	getRandomWeight();
+	static double	getCorrection(double value, FunctionType function_type);
+	static double	getDerivativeCorrection(double value, FunctionType function_type);
+};
+
+class NeuronConnection
+{
+private:
+	double			weight;
+	double			learning_rate;
+	FunctionType	function_type;
+	NeuronSimple	*from;
+	NeuronSimple	*to;
+public:
+	NeuronConnection(NeuronSimple &from, NeuronSimple &to, FunctionType function_type, double learning_rate, double weight);
+	double	getWeight() const;
+	void	setWeight(double weight);
+	double	getLearningRate() const;
+	void	setLearningRate(double learning_rate);
+	FunctionType	getFunctionType() const;
+	void	setFunctionType(FunctionType function_type);
+	NeuronSimple	&getNeuronFrom() const;
+	void	setNeuronFrom(NeuronSimple &from);
+	NeuronSimple	&getNeuronTo() const;
+	void	setNeuronTo(NeuronSimple &to);
+	static bool	isAlreadyConnected(t_SetNeuronConnections &connections, NeuronSimple &from, NeuronSimple &to);
+	friend bool	operator < (const NeuronConnection &first, const NeuronConnection &second);
+};
+
+class NeuronException
+{
+private:
+	long	code;
+	std::string	message;
+public:
+	NeuronException(long code, std::string message);
+	long	getCode();
+	std::string	getMessage();
+};
+
+class NeuronSimple
+{
+private:
+	double	status;
+	bool	is_available;
+	t_SetNeuronToConnections connections;
+	t_SetNeuronToConnections	&getAllConnections();
+private:
+	bool	isAvailable() const;
+	void	setAvailable(bool is_available);
+	bool	isExistConnection(NeuronConnection &connection) const;
+	void	addConnection(NeuronConnection &connection);
+	void	removeConnection(NeuronConnection &connection);
+public:
+	virtual ~NeuronSimple() {};
+	NeuronSimple(double status = 0);
 	double	getStatus() const;
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	/// \brief Set the status (value) for the given neuron.
-	/// \param status The default is set to 0. It is of type double.
-	/// For example 0.0 or 1.0 depending on whether the pixel is white or black.
-	////////////////////////////////////////////////////////////////////////////////////////////////////
 	void	setStatus(double status);
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	/// \brief Show the number of connections in which the neuron participates.
-	/// If the **addConnection** function from **NeuronNetwork** class was applied to this neuron 2 times, this function will return the number 2;
-	/// if the function was not applied, returns 0.
-	////////////////////////////////////////////////////////////////////////////////////////////////////
 	size_t	getCountConnections();
+	friend class NeuronNetwork;
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief It is a type of neuron. You don't need to work with its status (value), unlike **NeuronIn**.
-/// Create it, add it to your neural network and make the necessary connections with this class, and everything will work for you.
-////////////////////////////////////////////////////////////////////////////////////////////////////
-class NeuronDeep
+class NeuronIn : public NeuronSimple
 {
 public:
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	/// \brief Constructor for this type of neuron.
-	/// It does not take parameters, unlike the **NeuronIn** class.
-	////////////////////////////////////////////////////////////////////////////////////////////////////
+	NeuronIn(double status = 0);
+};
+
+class NeuronDeep : public NeuronSimple
+{
+private:
+	using NeuronSimple::setStatus;
+public:
 	NeuronDeep();
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	/// \brief The function returns the status (value) of this neuron.
-	/// It defaults to 0 and you cannot set it yourself.
-	/// The neural network, when executing the **compute** and **learn** functions from the **NeuronNetwork** class, does this for you.
-	/// You can use this feature for educational purposes and when trying to design a neural network.
-	/// After design, it is unnecessary.
-	/// Works in the same way as the function of the same name in the **NeuronIn** class.
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	double	getStatus() const;
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	/// \brief Show the number of connections in which the neuron participates.
-	/// If the **addConnection** function from **NeuronNetwork** class was applied to this neuron 2 times, this function will return the number 2;
-	/// if the function was not applied, returns 0.
-	/// Works in the same way as the function of the same name in the **NeuronIn** class.
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	size_t	getCountConnections();
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief Something
-////////////////////////////////////////////////////////////////////////////////////////////////////
-class NeuronOut
+class NeuronOut : public NeuronSimple
 {
+private:
+	using NeuronSimple::setStatus;
+	double	expectedStatus;
 public:
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	/// \brief Something
-	////////////////////////////////////////////////////////////////////////////////////////////////////
 	NeuronOut(double expectedStatus = 0.0);
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	/// \brief Something
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	double	getStatus() const;
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	/// \brief Something
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	size_t	getCountConnections();
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	/// \brief Something
-	////////////////////////////////////////////////////////////////////////////////////////////////////
 	void	setExpectedStatus(double expectedStatus);
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	/// \brief Something
-	////////////////////////////////////////////////////////////////////////////////////////////////////
 	double	getExpectedStatus() const;
 };
+
+class NeuronNetwork
+{
+private:
+	t_SetToNeurons neurons;
+	t_SetNeuronConnections connections;
+
+private:
+	void addConnection(NeuronSimple &from, NeuronSimple &to, FunctionType function_type, double learning_rate, double weight);
+	void removeAllConnections(NeuronSimple &neuron);
+	bool isNeuronIn(NeuronSimple &neuron);
+	bool isNeuronDeep(NeuronSimple &neuron);
+	bool isNeuronOut(NeuronSimple &neuron);
+	void disableAllNeurons();
+	void computeNeuron(NeuronSimple *next, double resume);
+	void learnNeuron(NeuronSimple &neuron, double sigma_weight);
+
+public:
+	~NeuronNetwork();
+	bool isExistNeuron(NeuronSimple &neuron);
+	void addNeuron(NeuronSimple &neuron);
+	template <typename T>
+	void addNeurons(T &container_neurons)
+	{
+		typename T::iterator begin = container_neurons.begin();
+		typename T::iterator end = container_neurons.end();
+
+		while (begin != end)
+		{
+			addNeuron(*begin);
+			begin++;
+		}
+	}
+	void removeNeuron(NeuronSimple &neuron);
+	void createConnection(NeuronSimple &from, NeuronSimple &to, FunctionType function_type, double learning_rate);
+	void createConnection(NeuronSimple &from, NeuronSimple &to, FunctionType function_type, double learning_rate, double weight);
+	size_t getCountNeurons();
+	size_t getCountConnections();
+	void compute();
+	void learn();
+};
+
