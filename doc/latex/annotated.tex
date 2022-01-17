@@ -1,6 +1,11 @@
 \doxysection{Class List}
 Here are the classes, structs, unions and interfaces with brief descriptions\+:\begin{DoxyCompactList}
-\item\contentsline{section}{\mbox{\hyperlink{class_neuron_deep}{Neuron\+Deep}} \\*It is a type of neuron. You don\textquotesingle{}t need to work with its status (value), unlike {\bfseries{\mbox{\hyperlink{class_neuron_in}{Neuron\+In}}}}. Create it, add it to your neural network and make the necessary connections with this class, and everything will work for you }{\pageref{class_neuron_deep}}{}
-\item\contentsline{section}{\mbox{\hyperlink{class_neuron_in}{Neuron\+In}} \\*This class allows you to create an input neuron where your input numeric data will be stored. The calculation of the neural network starts with these neurons }{\pageref{class_neuron_in}}{}
-\item\contentsline{section}{\mbox{\hyperlink{class_neuron_out}{Neuron\+Out}} }{\pageref{class_neuron_out}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_neuron_connection}{Neuron\+Connection}} \\*Class for the inner workings of the library. Implements connections between multiple neurons }{\pageref{class_neuron_connection}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_neuron_deep}{Neuron\+Deep}} \\*Deep neuron. There is no way to set the status (value). The neural network sets it when learning/calculating on its own. Just add objects of this class to the neural network, connect them with other neurons properly, and your task will be solved much more efficiently. ~\newline
+ }{\pageref{class_neuron_deep}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_neuron_exception}{Neuron\+Exception}} \\*Class for handling exceptions on library errors }{\pageref{class_neuron_exception}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_neuron_in}{Neuron\+In}} \\*Incoming neuron. In neural networks, only these classes store all input data }{\pageref{class_neuron_in}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_neuron_network}{Neuron\+Network}} \\*Neural network. This is where you load the neurons, this is where you create all the connections. This class trains and calculates the whole system }{\pageref{class_neuron_network}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_neuron_out}{Neuron\+Out}} \\*Deep neuron. It stores the prediction of the neural network after the calculation and you put the desired result during training in it }{\pageref{class_neuron_out}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \\*Base class for all types of neurons\+: input, deep, output }{\pageref{class_neuron_simple}}{}
 \end{DoxyCompactList}

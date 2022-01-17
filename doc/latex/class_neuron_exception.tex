@@ -1,20 +1,45 @@
 \hypertarget{class_neuron_exception}{}\doxysection{Neuron\+Exception Class Reference}
 \label{class_neuron_exception}\index{NeuronException@{NeuronException}}
+
+
+Class for handling exceptions on library errors.  
+
+
+
+
+{\ttfamily \#include $<$42neurons.\+hpp$>$}
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_neuron_exception_aa7c807b6ac0683501f4efce7c7fc0d0d}\label{class_neuron_exception_aa7c807b6ac0683501f4efce7c7fc0d0d}} 
-{\bfseries Neuron\+Exception} (long code, string message)
-\item 
+\mbox{\hyperlink{class_neuron_exception_ab40eba4e220daa57a915c8a829c4e0ad}{Neuron\+Exception}} (long code, std\+::string message)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_neuron_exception_a8b41b356abbc94e90c587460ab13ed6c}\label{class_neuron_exception_a8b41b356abbc94e90c587460ab13ed6c}} 
-long {\bfseries get\+Code} ()
-\item 
-\mbox{\Hypertarget{class_neuron_exception_ae0298a64263f987895d8138208722cfc}\label{class_neuron_exception_ae0298a64263f987895d8138208722cfc}} 
-string {\bfseries get\+Message} ()
-\end{DoxyCompactItemize}
+long \mbox{\hyperlink{class_neuron_exception_a8b41b356abbc94e90c587460ab13ed6c}{get\+Code}} ()
+\begin{DoxyCompactList}\small\item\em Returns an error code. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_neuron_exception_a1f46ddc17e8fe2935fae512fdb7c5695}\label{class_neuron_exception_a1f46ddc17e8fe2935fae512fdb7c5695}} 
+std\+::string \mbox{\hyperlink{class_neuron_exception_a1f46ddc17e8fe2935fae512fdb7c5695}{get\+Message}} ()
+\begin{DoxyCompactList}\small\item\em Returns an error message. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
-\item 
-/\+Users/imora/\+Desktop/42neurons\+\_\+new/exceptions/Neuron\+Exception.\+hpp\item 
-/\+Users/imora/\+Desktop/42neurons\+\_\+new/exceptions/Neuron\+Exception.\+cpp\end{DoxyCompactItemize}
+\doxysubsection{Detailed Description}
+Class for handling exceptions on library errors. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_neuron_exception_ab40eba4e220daa57a915c8a829c4e0ad}\label{class_neuron_exception_ab40eba4e220daa57a915c8a829c4e0ad}} 
+\index{NeuronException@{NeuronException}!NeuronException@{NeuronException}}
+\index{NeuronException@{NeuronException}!NeuronException@{NeuronException}}
+\doxysubsubsection{\texorpdfstring{NeuronException()}{NeuronException()}}
+{\footnotesize\ttfamily Neuron\+Exception\+::\+Neuron\+Exception (\begin{DoxyParamCaption}\item[{long}]{code,  }\item[{std\+::string}]{message }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & Error code. \\
+\hline
+{\em message} & Error message. \\
+\hline
+\end{DoxyParams}

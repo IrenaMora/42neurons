@@ -1,5 +1,14 @@
 \hypertarget{class_neuron_simple}{}\doxysection{Neuron\+Simple Class Reference}
 \label{class_neuron_simple}\index{NeuronSimple@{NeuronSimple}}
+
+
+Base class for all types of neurons\+: input, deep, output.  
+
+
+
+
+{\ttfamily \#include $<$42neurons.\+hpp$>$}
+
 Inheritance diagram for Neuron\+Simple\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,18 +18,19 @@ Inheritance diagram for Neuron\+Simple\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_neuron_simple_a14700fa47221cd9ddb9a9a304725bb14}\label{class_neuron_simple_a14700fa47221cd9ddb9a9a304725bb14}} 
-{\bfseries Neuron\+Simple} (double status=0)
-\item 
+\mbox{\Hypertarget{class_neuron_simple_a1e4903156155f1f240323476d3d04fe8}\label{class_neuron_simple_a1e4903156155f1f240323476d3d04fe8}} 
+virtual \mbox{\hyperlink{class_neuron_simple_a1e4903156155f1f240323476d3d04fe8}{$\sim$\+Neuron\+Simple}} ()
+\begin{DoxyCompactList}\small\item\em Class destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_neuron_simple_a14700fa47221cd9ddb9a9a304725bb14}{Neuron\+Simple}} (double status=0)
+\begin{DoxyCompactList}\small\item\em Class constructor. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_neuron_simple_a194e405c591fdcf98b20943040e96c42}\label{class_neuron_simple_a194e405c591fdcf98b20943040e96c42}} 
-double {\bfseries get\+Status} () const
-\item 
-\mbox{\Hypertarget{class_neuron_simple_aef658681a2509b95f646ccb000c514a1}\label{class_neuron_simple_aef658681a2509b95f646ccb000c514a1}} 
-void {\bfseries set\+Status} (double status)
-\item 
+double \mbox{\hyperlink{class_neuron_simple_a194e405c591fdcf98b20943040e96c42}{get\+Status}} () const
+\begin{DoxyCompactList}\small\item\em Get the status (value) of a neuron. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_neuron_simple_aef658681a2509b95f646ccb000c514a1}{set\+Status}} (double status)
+\begin{DoxyCompactList}\small\item\em Set the status (value) of a neuron. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_neuron_simple_a082e6d6849f7a6397290f0627cc160ac}\label{class_neuron_simple_a082e6d6849f7a6397290f0627cc160ac}} 
-size\+\_\+t {\bfseries get\+Count\+Connections} ()
-\end{DoxyCompactItemize}
+size\+\_\+t \mbox{\hyperlink{class_neuron_simple_a082e6d6849f7a6397290f0627cc160ac}{get\+Count\+Connections}} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of connections present in the neural network. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -29,7 +39,40 @@ class {\bfseries Neuron\+Network}
 \end{DoxyCompactItemize}
 
 
-The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
-\item 
-/\+Users/imora/\+Desktop/42neurons\+\_\+new/interfaces/Neuron\+Simple.\+hpp\item 
-/\+Users/imora/\+Desktop/42neurons\+\_\+new/interfaces/Neuron\+Simple.\+cpp\end{DoxyCompactItemize}
+\doxysubsection{Detailed Description}
+Base class for all types of neurons\+: input, deep, output. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_neuron_simple_a14700fa47221cd9ddb9a9a304725bb14}\label{class_neuron_simple_a14700fa47221cd9ddb9a9a304725bb14}} 
+\index{NeuronSimple@{NeuronSimple}!NeuronSimple@{NeuronSimple}}
+\index{NeuronSimple@{NeuronSimple}!NeuronSimple@{NeuronSimple}}
+\doxysubsubsection{\texorpdfstring{NeuronSimple()}{NeuronSimple()}}
+{\footnotesize\ttfamily Neuron\+Simple\+::\+Neuron\+Simple (\begin{DoxyParamCaption}\item[{double}]{status = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Class constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em status} & Specify the initial status (value) for the neuron for further calculations. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_neuron_simple_aef658681a2509b95f646ccb000c514a1}\label{class_neuron_simple_aef658681a2509b95f646ccb000c514a1}} 
+\index{NeuronSimple@{NeuronSimple}!setStatus@{setStatus}}
+\index{setStatus@{setStatus}!NeuronSimple@{NeuronSimple}}
+\doxysubsubsection{\texorpdfstring{setStatus()}{setStatus()}}
+{\footnotesize\ttfamily void Neuron\+Simple\+::set\+Status (\begin{DoxyParamCaption}\item[{double}]{status }\end{DoxyParamCaption})}
+
+
+
+Set the status (value) of a neuron. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em status} & Sets the status (value) for the neuron. Status (value) is directly involved in further calculations. \\
+\hline
+\end{DoxyParams}

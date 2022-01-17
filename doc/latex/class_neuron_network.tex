@@ -1,41 +1,156 @@
 \hypertarget{class_neuron_network}{}\doxysection{Neuron\+Network Class Reference}
 \label{class_neuron_network}\index{NeuronNetwork@{NeuronNetwork}}
+
+
+Neural network. This is where you load the neurons, this is where you create all the connections. This class trains and calculates the whole system.  
+
+
+
+
+{\ttfamily \#include $<$42neurons.\+hpp$>$}
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_neuron_network_af8a5bee50899e3352cbe3a4e926010a5}\label{class_neuron_network_af8a5bee50899e3352cbe3a4e926010a5}} 
-bool {\bfseries is\+Exist\+Neuron} (\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&neuron)
-\item 
-\mbox{\Hypertarget{class_neuron_network_a850dfe8e3535bfe9cfde75d9cac776d9}\label{class_neuron_network_a850dfe8e3535bfe9cfde75d9cac776d9}} 
-void {\bfseries add\+Neuron} (\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&neuron)
-\item 
-\mbox{\Hypertarget{class_neuron_network_ab41681324edf0f18964ac0774d10e9cc}\label{class_neuron_network_ab41681324edf0f18964ac0774d10e9cc}} 
-{\footnotesize template$<$typename T $>$ }\\void {\bfseries add\+Neurons} (T \&container\+\_\+neurons)
-\item 
-\mbox{\Hypertarget{class_neuron_network_ac06dc49e8adbb5e3a8d30f3af4ac133c}\label{class_neuron_network_ac06dc49e8adbb5e3a8d30f3af4ac133c}} 
-void {\bfseries remove\+Neuron} (\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&neuron)
-\item 
-\mbox{\Hypertarget{class_neuron_network_afc0363b17a9f78e84721c05549f454ae}\label{class_neuron_network_afc0363b17a9f78e84721c05549f454ae}} 
-void {\bfseries create\+Connection} (\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&from, \mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&to, Function\+Type function\+\_\+type, double learning\+\_\+rate)
-\item 
-\mbox{\Hypertarget{class_neuron_network_afeb45288eeecddbf2d9ca6e8c3aaf043}\label{class_neuron_network_afeb45288eeecddbf2d9ca6e8c3aaf043}} 
-void {\bfseries create\+Connection} (\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&from, \mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&to, Function\+Type function\+\_\+type, double learning\+\_\+rate, double weight)
-\item 
+\mbox{\Hypertarget{class_neuron_network_a4df5774bcab019cf5904dc44e3865609}\label{class_neuron_network_a4df5774bcab019cf5904dc44e3865609}} 
+\mbox{\hyperlink{class_neuron_network_a4df5774bcab019cf5904dc44e3865609}{$\sim$\+Neuron\+Network}} ()
+\begin{DoxyCompactList}\small\item\em Class destructor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_neuron_network_af8a5bee50899e3352cbe3a4e926010a5}{is\+Exist\+Neuron}} (\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&neuron)
+\begin{DoxyCompactList}\small\item\em Returns whether a neuron exists in this neural network. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_neuron_network_a850dfe8e3535bfe9cfde75d9cac776d9}{add\+Neuron}} (\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&neuron)
+\begin{DoxyCompactList}\small\item\em Add a neuron to this neural network. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{class_neuron_network_ab41681324edf0f18964ac0774d10e9cc}{add\+Neurons}} (T \&container\+\_\+neurons)
+\begin{DoxyCompactList}\small\item\em Add neurons to this neural network. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_neuron_network_ac06dc49e8adbb5e3a8d30f3af4ac133c}{remove\+Neuron}} (\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&neuron)
+\begin{DoxyCompactList}\small\item\em Removes a neuron from this neural network. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_neuron_network_afc0363b17a9f78e84721c05549f454ae}{create\+Connection}} (\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&from, \mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&to, Function\+Type function\+\_\+type, double learning\+\_\+rate)
+\begin{DoxyCompactList}\small\item\em Creating a connection between two neurons with a random weight. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_neuron_network_afeb45288eeecddbf2d9ca6e8c3aaf043}{create\+Connection}} (\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&from, \mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&to, Function\+Type function\+\_\+type, double learning\+\_\+rate, double weight)
+\begin{DoxyCompactList}\small\item\em Creating a connection between two neurons. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_neuron_network_aca15f25995d8414f4399974c2ded03cc}\label{class_neuron_network_aca15f25995d8414f4399974c2ded03cc}} 
-size\+\_\+t {\bfseries get\+Count\+Neurons} ()
-\item 
+size\+\_\+t \mbox{\hyperlink{class_neuron_network_aca15f25995d8414f4399974c2ded03cc}{get\+Count\+Neurons}} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of neurons that are part of this neural network. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_neuron_network_a2abe6aa17a924dca9940721b6b1cca47}\label{class_neuron_network_a2abe6aa17a924dca9940721b6b1cca47}} 
-size\+\_\+t {\bfseries get\+Count\+Connections} ()
-\item 
+size\+\_\+t \mbox{\hyperlink{class_neuron_network_a2abe6aa17a924dca9940721b6b1cca47}{get\+Count\+Connections}} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of connections contained in this neural network. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_neuron_network_a77330b6b7501307d8c002ee0fe32c6b9}\label{class_neuron_network_a77330b6b7501307d8c002ee0fe32c6b9}} 
-void {\bfseries compute} ()
-\item 
+void \mbox{\hyperlink{class_neuron_network_a77330b6b7501307d8c002ee0fe32c6b9}{compute}} ()
+\begin{DoxyCompactList}\small\item\em Make a prediction. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_neuron_network_a26f0ade49aaf67ea160d88ee5481c5a1}\label{class_neuron_network_a26f0ade49aaf67ea160d88ee5481c5a1}} 
-void {\bfseries learn} ()
-\begin{DoxyCompactList}\small\item\em The function learning this neural network based on the neurons and their connections. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_neuron_network_a26f0ade49aaf67ea160d88ee5481c5a1}{learn}} ()
+\begin{DoxyCompactList}\small\item\em Trains a neural network. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
-\item 
-/\+Users/imora/\+Desktop/42neurons\+\_\+new/network/Neuron\+Network.\+hpp\item 
-/\+Users/imora/\+Desktop/42neurons\+\_\+new/network/Neuron\+Network.\+cpp\end{DoxyCompactItemize}
+\doxysubsection{Detailed Description}
+Neural network. This is where you load the neurons, this is where you create all the connections. This class trains and calculates the whole system. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_neuron_network_a850dfe8e3535bfe9cfde75d9cac776d9}\label{class_neuron_network_a850dfe8e3535bfe9cfde75d9cac776d9}} 
+\index{NeuronNetwork@{NeuronNetwork}!addNeuron@{addNeuron}}
+\index{addNeuron@{addNeuron}!NeuronNetwork@{NeuronNetwork}}
+\doxysubsubsection{\texorpdfstring{addNeuron()}{addNeuron()}}
+{\footnotesize\ttfamily void Neuron\+Network\+::add\+Neuron (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&}]{neuron }\end{DoxyParamCaption})}
+
+
+
+Add a neuron to this neural network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neuron} & The neuron we are testing. ~\newline
+ \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_neuron_network_ab41681324edf0f18964ac0774d10e9cc}\label{class_neuron_network_ab41681324edf0f18964ac0774d10e9cc}} 
+\index{NeuronNetwork@{NeuronNetwork}!addNeurons@{addNeurons}}
+\index{addNeurons@{addNeurons}!NeuronNetwork@{NeuronNetwork}}
+\doxysubsubsection{\texorpdfstring{addNeurons()}{addNeurons()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void Neuron\+Network\+::add\+Neurons (\begin{DoxyParamCaption}\item[{T \&}]{container\+\_\+neurons }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add neurons to this neural network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em container\+\_\+neurons} & Any container containing the neurons we want to add. ~\newline
+ \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_neuron_network_afc0363b17a9f78e84721c05549f454ae}\label{class_neuron_network_afc0363b17a9f78e84721c05549f454ae}} 
+\index{NeuronNetwork@{NeuronNetwork}!createConnection@{createConnection}}
+\index{createConnection@{createConnection}!NeuronNetwork@{NeuronNetwork}}
+\doxysubsubsection{\texorpdfstring{createConnection()}{createConnection()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Neuron\+Network\+::create\+Connection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&}]{from,  }\item[{\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&}]{to,  }\item[{Function\+Type}]{function\+\_\+type,  }\item[{double}]{learning\+\_\+rate }\end{DoxyParamCaption})}
+
+
+
+Creating a connection between two neurons with a random weight. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & Initial neuron. \\
+\hline
+{\em to} & Terminal neuron. \\
+\hline
+{\em function\+\_\+type} & Activation function type. \\
+\hline
+{\em learning\+\_\+rate} & Neural network learning rate. Usually has small fractional values. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_neuron_network_afeb45288eeecddbf2d9ca6e8c3aaf043}\label{class_neuron_network_afeb45288eeecddbf2d9ca6e8c3aaf043}} 
+\index{NeuronNetwork@{NeuronNetwork}!createConnection@{createConnection}}
+\index{createConnection@{createConnection}!NeuronNetwork@{NeuronNetwork}}
+\doxysubsubsection{\texorpdfstring{createConnection()}{createConnection()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Neuron\+Network\+::create\+Connection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&}]{from,  }\item[{\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&}]{to,  }\item[{Function\+Type}]{function\+\_\+type,  }\item[{double}]{learning\+\_\+rate,  }\item[{double}]{weight }\end{DoxyParamCaption})}
+
+
+
+Creating a connection between two neurons. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & Initial neuron. \\
+\hline
+{\em to} & Terminal neuron. \\
+\hline
+{\em function\+\_\+type} & Activation function type. \\
+\hline
+{\em learning\+\_\+rate} & Neural network learning rate. Usually has small fractional values. \\
+\hline
+{\em weight} & Initial connection weight between two neurons. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_neuron_network_af8a5bee50899e3352cbe3a4e926010a5}\label{class_neuron_network_af8a5bee50899e3352cbe3a4e926010a5}} 
+\index{NeuronNetwork@{NeuronNetwork}!isExistNeuron@{isExistNeuron}}
+\index{isExistNeuron@{isExistNeuron}!NeuronNetwork@{NeuronNetwork}}
+\doxysubsubsection{\texorpdfstring{isExistNeuron()}{isExistNeuron()}}
+{\footnotesize\ttfamily bool Neuron\+Network\+::is\+Exist\+Neuron (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&}]{neuron }\end{DoxyParamCaption})}
+
+
+
+Returns whether a neuron exists in this neural network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neuron} & Neuron that is being tested for existence ~\newline
+ \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_neuron_network_ac06dc49e8adbb5e3a8d30f3af4ac133c}\label{class_neuron_network_ac06dc49e8adbb5e3a8d30f3af4ac133c}} 
+\index{NeuronNetwork@{NeuronNetwork}!removeNeuron@{removeNeuron}}
+\index{removeNeuron@{removeNeuron}!NeuronNetwork@{NeuronNetwork}}
+\doxysubsubsection{\texorpdfstring{removeNeuron()}{removeNeuron()}}
+{\footnotesize\ttfamily void Neuron\+Network\+::remove\+Neuron (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&}]{neuron }\end{DoxyParamCaption})}
+
+
+
+Removes a neuron from this neural network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neuron} & Neuron to be deleted. ~\newline
+ \\
+\hline
+\end{DoxyParams}

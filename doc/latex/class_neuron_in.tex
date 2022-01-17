@@ -2,30 +2,28 @@
 \label{class_neuron_in}\index{NeuronIn@{NeuronIn}}
 
 
-This class allows you to create an input neuron where your input numeric data will be stored. The calculation of the neural network starts with these neurons.  
+Incoming neuron. In neural networks, only these classes store all input data.  
 
 
 
 
 {\ttfamily \#include $<$42neurons.\+hpp$>$}
 
+Inheritance diagram for Neuron\+In\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_neuron_in}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_neuron_in_a941209929339a50827712e269a08375e}{Neuron\+In}} (double status=0)
-\begin{DoxyCompactList}\small\item\em The constructor allows you to set the default status (value) of the neuron. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_neuron_in_a30387477b3213affa7a97c1922c15453}\label{class_neuron_in_a30387477b3213affa7a97c1922c15453}} 
-double {\bfseries get\+Status} () const
-\begin{DoxyCompactList}\small\item\em Get the status (value) of this neuron. This status was set by you before. The neural network cannot change it, because the neuron is the input. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_neuron_in_a5227424d956f75c95bffddbdca860afb}{set\+Status}} (double status)
-\begin{DoxyCompactList}\small\item\em Set the status (value) for the given neuron. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_neuron_in_ad25e2122ad6aadd32a5315ac6c30770f}\label{class_neuron_in_ad25e2122ad6aadd32a5315ac6c30770f}} 
-size\+\_\+t {\bfseries get\+Count\+Connections} ()
-\begin{DoxyCompactList}\small\item\em Show the number of connections in which the neuron participates. If the {\bfseries{add\+Connection}} function from {\bfseries{Neuron\+Network}} class was applied to this neuron 2 times, this function will return the number 2; if the function was not applied, returns 0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Class constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-This class allows you to create an input neuron where your input numeric data will be stored. The calculation of the neural network starts with these neurons. 
+Incoming neuron. In neural networks, only these classes store all input data. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{class_neuron_in_a941209929339a50827712e269a08375e}\label{class_neuron_in_a941209929339a50827712e269a08375e}} 
@@ -36,28 +34,10 @@ This class allows you to create an input neuron where your input numeric data wi
 
 
 
-The constructor allows you to set the default status (value) of the neuron. 
+Class constructor. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em status} & The default is set to 0. It is of type double. For example, the value of \char`\"{}red\char`\"{} for a pixel from rgb (from 0 to 255) \\
-\hline
-\end{DoxyParams}
-
-
-\doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_neuron_in_a5227424d956f75c95bffddbdca860afb}\label{class_neuron_in_a5227424d956f75c95bffddbdca860afb}} 
-\index{NeuronIn@{NeuronIn}!setStatus@{setStatus}}
-\index{setStatus@{setStatus}!NeuronIn@{NeuronIn}}
-\doxysubsubsection{\texorpdfstring{setStatus()}{setStatus()}}
-{\footnotesize\ttfamily void Neuron\+In\+::set\+Status (\begin{DoxyParamCaption}\item[{double}]{status }\end{DoxyParamCaption})}
-
-
-
-Set the status (value) for the given neuron. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em status} & The default is set to 0. It is of type double. For example 0.\+0 or 1.\+0 depending on whether the pixel is white or black. \\
+{\em status} & The status (value) of a neuron stores the input data. For example, it can store the amount of red color from rgb (from 0 to 255), or store the price of a currency. \\
 \hline
 \end{DoxyParams}

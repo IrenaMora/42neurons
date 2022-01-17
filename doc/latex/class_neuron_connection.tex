@@ -1,56 +1,21 @@
 \hypertarget{class_neuron_connection}{}\doxysection{Neuron\+Connection Class Reference}
 \label{class_neuron_connection}\index{NeuronConnection@{NeuronConnection}}
-\doxysubsection*{Public Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{class_neuron_connection_a94968eb3fb224d350c697b71929c69e9}\label{class_neuron_connection_a94968eb3fb224d350c697b71929c69e9}} 
-{\bfseries Neuron\+Connection} (\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&from, \mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&to, Function\+Type function\+\_\+type, double learning\+\_\+rate, double weight)
-\item 
-\mbox{\Hypertarget{class_neuron_connection_adc884b50002948abf31ac3009093f570}\label{class_neuron_connection_adc884b50002948abf31ac3009093f570}} 
-double {\bfseries get\+Weight} () const
-\item 
-\mbox{\Hypertarget{class_neuron_connection_ae9a6a0f4d55a439e707e430def33dda7}\label{class_neuron_connection_ae9a6a0f4d55a439e707e430def33dda7}} 
-void {\bfseries set\+Weight} (double weight)
-\item 
-\mbox{\Hypertarget{class_neuron_connection_a856b72b06ce009176ac92b0f48163d6d}\label{class_neuron_connection_a856b72b06ce009176ac92b0f48163d6d}} 
-double {\bfseries get\+Learning\+Rate} () const
-\item 
-\mbox{\Hypertarget{class_neuron_connection_a50c272809d78574e825017175f201a47}\label{class_neuron_connection_a50c272809d78574e825017175f201a47}} 
-void {\bfseries set\+Learning\+Rate} (double learning\+\_\+rate)
-\item 
-\mbox{\Hypertarget{class_neuron_connection_a71b34350a1602b9cf8d0f7f996667d8b}\label{class_neuron_connection_a71b34350a1602b9cf8d0f7f996667d8b}} 
-Function\+Type {\bfseries get\+Function\+Type} () const
-\item 
-\mbox{\Hypertarget{class_neuron_connection_a54e456627a1d5e5ae904864c9f69ed9c}\label{class_neuron_connection_a54e456627a1d5e5ae904864c9f69ed9c}} 
-void {\bfseries set\+Function\+Type} (Function\+Type function\+\_\+type)
-\item 
-\mbox{\Hypertarget{class_neuron_connection_a6f088e8ec280b200e45a917c4d8b4feb}\label{class_neuron_connection_a6f088e8ec280b200e45a917c4d8b4feb}} 
-\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \& {\bfseries get\+Neuron\+From} () const
-\item 
-\mbox{\Hypertarget{class_neuron_connection_ad63882bbb54f3f06c332c39b619b2dc9}\label{class_neuron_connection_ad63882bbb54f3f06c332c39b619b2dc9}} 
-void {\bfseries set\+Neuron\+From} (\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&from)
-\item 
-\mbox{\Hypertarget{class_neuron_connection_a6616717f33b3222c86f7df5ea8eed4ea}\label{class_neuron_connection_a6616717f33b3222c86f7df5ea8eed4ea}} 
-\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \& {\bfseries get\+Neuron\+To} () const
-\item 
-\mbox{\Hypertarget{class_neuron_connection_a2e77206e4ed84c2ef3ba0c53e3191614}\label{class_neuron_connection_a2e77206e4ed84c2ef3ba0c53e3191614}} 
-void {\bfseries set\+Neuron\+To} (\mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&to)
-\end{DoxyCompactItemize}
-\doxysubsection*{Static Public Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{class_neuron_connection_a58b88db99eeadce6480284ebdae33777}\label{class_neuron_connection_a58b88db99eeadce6480284ebdae33777}} 
-static bool {\bfseries is\+Already\+Connected} (t\+\_\+\+Set\+Neuron\+Connections \&connections, \mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&from, \mbox{\hyperlink{class_neuron_simple}{Neuron\+Simple}} \&to)
-\end{DoxyCompactItemize}
+
+
+Class for the inner workings of the library. Implements connections between multiple neurons.  
+
+
+
+
+{\ttfamily \#include $<$42neurons.\+hpp$>$}
+
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_neuron_connection_ac9f3673eb5a86143ad7053e7b65924d7}\label{class_neuron_connection_ac9f3673eb5a86143ad7053e7b65924d7}} 
-bool {\bfseries operator$<$} (const \mbox{\hyperlink{class_neuron_connection}{Neuron\+Connection}} \&first, const \mbox{\hyperlink{class_neuron_connection}{Neuron\+Connection}} \&second)
-\end{DoxyCompactItemize}
+bool \mbox{\hyperlink{class_neuron_connection_ac9f3673eb5a86143ad7053e7b65924d7}{operator$<$}} (const \mbox{\hyperlink{class_neuron_connection}{Neuron\+Connection}} \&first, const \mbox{\hyperlink{class_neuron_connection}{Neuron\+Connection}} \&second)
+\begin{DoxyCompactList}\small\item\em Operator overload comparison. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
-\item 
-/\+Users/imora/\+Desktop/42neurons\+\_\+new/connection/Neuron\+Connection.\+hpp\item 
-/\+Users/imora/\+Desktop/42neurons\+\_\+new/connection/Neuron\+Connection.\+cpp\end{DoxyCompactItemize}
+\doxysubsection{Detailed Description}
+Class for the inner workings of the library. Implements connections between multiple neurons. 
