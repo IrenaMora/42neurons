@@ -27,12 +27,12 @@ private:
 	bool	isExistConnection(NeuronConnection &connection) const;
 	void	addConnection(NeuronConnection &connection);
 	void	removeConnection(NeuronConnection &connection);
+	NeuronType getType();
 public:
 	virtual ~NeuronSimple() {};
 	NeuronSimple(double status = 0, NeuronType type = NeuronType::NOPE);
 	double	getStatus() const;
 	void	setStatus(double status);
-	NeuronType getType();
 	size_t	getCountConnections();
 	friend class NeuronNetwork;
 };

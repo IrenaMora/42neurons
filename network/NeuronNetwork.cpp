@@ -38,36 +38,18 @@ void	NeuronNetwork::removeAllConnections(NeuronSimple &neuron)
 
 bool	NeuronNetwork::isNeuronIn(NeuronSimple &neuron)
 {
-	try
-	{
-		(void)dynamic_cast<NeuronIn &>(neuron);
-		return (true);
-	}
-	catch (std::bad_cast) {}
-	return (false);
+	return (neuron.getType() == NeuronType::IN);
 }
 
 bool	NeuronNetwork::isNeuronDeep(NeuronSimple &neuron)
 {
-	try
-	{
-		(void)dynamic_cast<NeuronDeep &>(neuron);
-		return (true);
-	}
-	catch (std::bad_cast) {}
-	return (false);
+	return (neuron.getType() == NeuronType::DEEP);
 }
 
 
 bool	NeuronNetwork::isNeuronOut(NeuronSimple &neuron)
 {
-	try
-	{
-		(void)dynamic_cast<NeuronOut &>(neuron);
-		return (true);
-	}
-	catch (std::bad_cast) {}
-	return (false);
+	return (neuron.getType() == NeuronType::OUT);
 }
 
 void	NeuronNetwork::disableAllNeurons()
@@ -114,7 +96,7 @@ void	NeuronNetwork::learnNeuron(NeuronSimple &neuron, double sigma_weight)
 
 	while (begin != end)
 	{
-		currentConnection = dynamic_cast<NeuronConnection *>(*begin);
+		currentConnection = *begin;
 		if (&(currentConnection->getNeuronTo()) == &neuron)
 		{
 			delta_current_weight = sigma_weight * currentConnection->getWeight() * currentConnection->getNeuronFrom().getStatus() * currentConnection->getLearningRate();
@@ -230,7 +212,7 @@ void	NeuronNetwork::learn()
 		currentNeuron = *begin;
 		if (isNeuronOut(*currentNeuron))
 		{
-			delta = dynamic_cast<NeuronOut *>(currentNeuron)->getExpectedStatus() - currentNeuron->getStatus();
+			delta = ((NeuronOut *)(currentNeuron))->getExpectedStatus() - currentNeuron->getStatus();
 			t_SetNeuronToConnections::iterator begin2 = currentNeuron->getAllConnections().begin();
 			t_SetNeuronToConnections::iterator end2 = currentNeuron->getAllConnections().end();
 			while (begin2 != end2)

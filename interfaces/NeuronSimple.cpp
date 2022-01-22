@@ -62,6 +62,11 @@ void	NeuronSimple::removeConnection(NeuronConnection &connection)
 	throw (NeuronException(0, "This connection is not exist"));
 }
 
+NeuronType NeuronSimple::getType()
+{
+	return (this->type);
+}
+
 double	NeuronSimple::getStatus() const
 {
 	return (this->status);
@@ -70,11 +75,6 @@ double	NeuronSimple::getStatus() const
 void	NeuronSimple::setStatus(double status)
 {
 	this->status = status;
-}
-
-NeuronType NeuronSimple::getType()
-{
-	return (this->type);
 }
 
 size_t	NeuronSimple::getCountConnections()
