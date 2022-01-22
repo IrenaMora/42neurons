@@ -167,8 +167,9 @@ void	NeuronNetwork::removeNeuron(NeuronSimple &neuron)
 	t_SetToNeurons::iterator begin;
 	t_SetToNeurons::iterator end;
 
-	if (neuron.isAvailable())
-		throw (NeuronException(0, "The neuron does not use in this neural network"));
+	//Ненужная  проверка
+	//if (neuron.isAvailable())
+	//	throw (NeuronException(0, "The neuron does not use in this neural network"));
 	begin = this->neurons.begin();
 	end = this->neurons.end();
 	while (begin != end)
