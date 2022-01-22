@@ -174,10 +174,6 @@ private:
 	void learnNeuron(NeuronSimple &neuron, double sigma_weight);
 public:
 	//////////////////////////////////////////
-	/// \brief Class destructor.
-	//////////////////////////////////////////
-	~NeuronNetwork();
-	//////////////////////////////////////////
 	/// \brief Returns whether a neuron exists in this neural network.
 	/// \param neuron Neuron that is being tested for existence  
 	//////////////////////////////////////////
