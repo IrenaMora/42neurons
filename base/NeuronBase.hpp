@@ -8,6 +8,14 @@
 
 using namespace std;
 
+enum NeuronType
+{
+	IN,
+	DEEP,
+	OUT,
+	NOPE
+};
+
 enum FunctionType
 {
 	SIGMOID,

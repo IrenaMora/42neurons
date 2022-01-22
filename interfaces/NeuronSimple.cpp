@@ -4,7 +4,7 @@
 
 #include "NeuronSimple.hpp"
 
-NeuronSimple::NeuronSimple(double status) : is_available(true)
+NeuronSimple::NeuronSimple(double status, NeuronType type) : is_available(true), type(type)
 {
 	setStatus(status);
 }
@@ -70,6 +70,11 @@ double	NeuronSimple::getStatus() const
 void	NeuronSimple::setStatus(double status)
 {
 	this->status = status;
+}
+
+NeuronType NeuronSimple::getType()
+{
+	return (this->type);
 }
 
 size_t	NeuronSimple::getCountConnections()

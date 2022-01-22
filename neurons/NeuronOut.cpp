@@ -4,7 +4,7 @@
 
 #include "NeuronOut.hpp"
 
-NeuronOut::NeuronOut(double expectedStatus) : expectedStatus(expectedStatus) {}
+NeuronOut::NeuronOut(double expectedStatus) : NeuronSimple(0, NeuronType::OUT), expectedStatus(expectedStatus) {}
 
 void    NeuronOut::setExpectedStatus(double expectedStatus)
 {

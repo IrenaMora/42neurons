@@ -4,4 +4,4 @@
 
 #include "NeuronIn.hpp"
 
-NeuronIn::NeuronIn(double status) : NeuronSimple(status) {}
+NeuronIn::NeuronIn(double status) : NeuronSimple(status, NeuronType::IN) {}

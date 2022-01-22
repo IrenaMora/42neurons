@@ -20,6 +20,7 @@ private:
 	bool	is_available;
 	t_SetNeuronToConnections connections;
 	t_SetNeuronToConnections	&getAllConnections();
+	NeuronType	type;
 private:
 	bool	isAvailable() const;
 	void	setAvailable(bool is_available);
@@ -28,9 +29,10 @@ private:
 	void	removeConnection(NeuronConnection &connection);
 public:
 	virtual ~NeuronSimple() {};
-	NeuronSimple(double status = 0);
+	NeuronSimple(double status = 0, NeuronType type = NeuronType::NOPE);
 	double	getStatus() const;
 	void	setStatus(double status);
+	NeuronType getType();
 	size_t	getCountConnections();
 	friend class NeuronNetwork;
 };

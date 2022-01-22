@@ -4,4 +4,4 @@
 
 #include "NeuronDeep.hpp"
 
-NeuronDeep::NeuronDeep() : NeuronSimple() {}
+NeuronDeep::NeuronDeep() : NeuronSimple(0, NeuronType::DEEP) {}

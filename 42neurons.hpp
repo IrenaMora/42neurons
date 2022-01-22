@@ -7,6 +7,14 @@
 #include <set>
 #include <iostream>
 
+enum NeuronType
+{
+	IN,
+	DEEP,
+	OUT,
+	NOPE
+};
+
 enum FunctionType
 {
 	SIGMOID,
@@ -67,6 +75,7 @@ private:
 	bool	is_available;
 	t_SetNeuronToConnections connections;
 	t_SetNeuronToConnections	&getAllConnections();
+	NeuronType	type;
 private:
 	bool	isAvailable() const;
 	void	setAvailable(bool is_available);
@@ -82,7 +91,7 @@ public:
 	/// \brief Class constructor.
 	/// \param status Specify the initial status (value) for the neuron for further calculations.
 	//////////////////////////////////////////
-	NeuronSimple(double status = 0);
+	NeuronSimple(double status = 0, NeuronType type = NeuronType::NOPE);
 	//////////////////////////////////////////
 	/// \brief Get the status (value) of a neuron.
 	//////////////////////////////////////////
