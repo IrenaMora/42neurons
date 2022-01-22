@@ -54,7 +54,5 @@ All examples - from simple to complex - are in the folder examples
 It requires installed image library - imagemagick and pkg-config library.
 
 Installation for Mac:
-
 brew install imagemagick
-
 brew install pkg-config
