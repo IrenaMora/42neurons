@@ -4,19 +4,6 @@
 
 #include "NeuronNetwork.hpp"
 
-NeuronNetwork::~NeuronNetwork()
-{
-	t_SetToNeurons::iterator begin = this->neurons.begin();
-	t_SetToNeurons::iterator end = this->neurons.end();
-
-	while (begin != end)
-	{
-		this->removeNeuron(**begin);
-		begin = this->neurons.begin();
-		end = this->neurons.end();
-	}
-}
-
 void	NeuronNetwork::addConnection(NeuronSimple &from, NeuronSimple &to, FunctionType function_type, double learning_rate, double weight)
 {
 	t_SetNeuronConnections::iterator current = this->connections.insert(NeuronConnection(from, to, function_type, learning_rate, weight)).first;

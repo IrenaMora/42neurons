@@ -30,7 +30,6 @@ private:
 	void learnNeuron(NeuronSimple &neuron, double sigma_weight);
 
 public:
-	~NeuronNetwork();
 	bool isExistNeuron(NeuronSimple &neuron);
 	void addNeuron(NeuronSimple &neuron);
 	template<typename T>
