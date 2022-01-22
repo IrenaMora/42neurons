@@ -52,7 +52,3 @@ All examples - from simple to complex - are in the folder examples
 **Why doesn't the ImageRecognition example compile?**
 
 It requires installed image library - imagemagick and pkg-config library.
-
-Installation for Mac:
-brew install imagemagick
-brew install pkg-config
