@@ -1,253 +1,148 @@
-//
-// Created by Irena Mora on 1/4/22.
-//
-
-/* Настоящий проект - пример использования библиотеки в распознавании изображений */
-/* Программа предсказывает, какая цифра находится на черно-белом изображении 10 x 10 пикселей - нуль или единица */
+/* Настоящий проект - пример использования библиотеки в распознавании изображений. */
+/* Программа предсказывает, какая цифра находится на черно-белом изображении 20x20 пикселей. */
 
 #include <set>
 #include <iostream>
-/* Установка библиотеки для работы с изображениями */
-/* Для MacOS: brew install imagemagick */
+#include <string>
+
+/* Установка библиотеки для работы с изображениями.
+  Для MacOS:
+	brew install pkg-config
+	brew install imagemagick
+*/
 #include <Magick++.h>
-/* Подключаем заголовочный файл библиотеки */
+
+/* Подключаем заголовочный файл библиотеки. */
 #include "../../42neurons.hpp"
 
-/* Подключаем пространства имен */
-using namespace std;
-using namespace Magick;
+const int HEIGHT_PIXELS = 20;
+const int WIDTH_PIXELS = 20;
+const int DIGITS_LIMIT = 10;
 
-/* Возвращает единицу, если пиксель является черным цветом */
-inline int getPixelStatus(ColorRGB &pixel)
+/* Возвращает единицу, если пиксель является черным цветом. */
+inline int getPixelStatus(const Magick::ColorRGB &pixel)
 {
-	return (pixel.red() && pixel.green() && pixel.blue());
+	return pixel.red() && pixel.green() && pixel.blue();
 }
 
-/* Устанавливает значения (0 или 1) для всех входящих нейронов в зависимости от цвета пикселя */
-void setNeuronsContainer(vector<NeuronIn> &in_neurons, string filename)
+/* Устанавливает значения (0 или 1) для всех входящих нейронов в зависимости от цвета пикселя. */
+void setNeuronsContainer(std::vector<NeuronIn> &in_neurons, const std::string &filename)
+try
 {
-	/* Создаем счетчик, показывающий, какому нейрону выдаем статус (значение) в настоящий момент */
-	int i = 0;
-	try
-	{
-		/* Создание переменной, хращяней в дальнейшем цвет конкретного пикселя */
-		ColorRGB pixel;
-		/* Загружаем картинку для дальнейшего получения пикселей */
-		Image image(filename);
-		/* Получаем размер изображения (в нашем случае 10 пикселей) */
-		int width_image = image.columns();
-		/* Получаем размер изображения (в нашем случае 10 пикселей) */
-		int height_image = image.rows();
+	/* Создание переменной, хращяней в дальнейшем цвет конкретного пикселя. */
+	Magick::ColorRGB pixel;
+	/* Загружаем картинку для дальнейшего получения пикселей. */
+	Magick::Image image(filename);
 
-		/* Перебираем каждый пиксель по одной координате */
-		for (int height_current = 0; height_current < 10; height_current++)
+	/* Перебираем каждый пиксель по одной координате. */
+	for (auto current_width = 0; current_width != WIDTH_PIXELS; ++current_width)
+	{
+		/* Перебираем каждый пиксель по второй координате. */
+		for (auto current_height = 0; current_height != HEIGHT_PIXELS; ++current_height)
 		{
-			/* Перебираем каждый пиксель по другой координате */
-			for (int width_current = 0; width_current < 10; width_current++)
-			{
-				/* Получаем RGB пикселя по его координатам */
-				pixel = image.pixelColor(width_current, height_current);
-				/* Устанавливаем статус (значение) для входящего нейрона */
-				/* 1 - если пиксель черный; 0 - если пиксель иного цвета */
-				in_neurons.at(i).setStatus(getPixelStatus(pixel));
-				/* Сдвигаем позицию для дальнейшего указания на то, к какому нейрону обращаемся */
-				i++;
-			}
+			/* Получаем RGB пикселя по его координатам. */
+			pixel = image.pixelColor(current_width, current_height);
+			/* Устанавливаем статус (значение) для входящего нейрона: */
+			/* 		1 - если пиксель черный; 0 - если пиксель иного цвета. */
+			in_neurons.at(current_height * HEIGHT_PIXELS + current_width).setStatus(getPixelStatus(pixel));
 		}
-		/* Итого, перебрали каждый пиксель, установив каждому нейрону необходимый статус (значение) */
 	}
-	catch (Magick::Exception &e)
-	{
-		/* Выходим в случае ошибки */
-		cerr << "Magick++ exception: " << e.what() << endl;
-		exit(1);
-	}
-	catch (exception &e)
-	{
-		/* Выходим в случае ошибки */
-		cerr << "Exception: " << e.what() << endl;
-		exit(1);
-	}
+	/* Итого, перебрали каждый пиксель, установив каждому нейрону необходимый статус (значение). */
+}
+catch (const Magick::Exception &e)
+{
+	/* Выходим в случае ошибки Magick++. */
+	std::cerr << "Magick++ exception: " << e.what() << '\n';
+	exit(1);
+}
+catch (const std::exception &e)
+{
+	/* Выходим в случае иной ошибки. */
+	std::cerr << "Exception: " << e.what() << '\n';
+	exit(1);
 }
 
 int	main()
 {
-	/* Инициализируем входные нейроны. Так как изображение 10 x 10, то количество нейронов - это 100 */
-	vector<NeuronIn> in_neurons(100);
-	/* Инициализируем глубокие нейроны для нуля */
-	vector<NeuronDeep> deep_neurons_zero(100);
-	/* Инициализируем глубокие нейроны для единицы */
-	vector<NeuronDeep> deep_neurons_one(100);
-	/* Инициализируем выходной нейрон для нуля, где будет содержаться предсказанный ответ */
-	NeuronOut out_zero;
-	/* Инициализируем выходной нейрон для единицы, где будет содержаться предсказанный ответ */
-	NeuronOut out_one;
+	/* Инициализируем входные нейроны. */
+	std::vector<NeuronIn> in_neurons(HEIGHT_PIXELS * WIDTH_PIXELS);
+
+	/* Инициализируем глубокие нейроны. */
+	std::vector<std::vector<NeuronDeep>> deep_neurons(DIGITS_LIMIT, std::vector<NeuronDeep>(HEIGHT_PIXELS * WIDTH_PIXELS));
+
+	/* Инициализируем выходные нейроны, где будут содержаться предсказанные ответы. */
+	std::vector<NeuronOut> out_neurons(DIGITS_LIMIT);
 
 	/* Создаем нейронную сеть */
 	NeuronNetwork network;
 
-	/* Загружаем пустые нейроны */
-	for (int i = 0; i < 100; i++)
-		in_neurons.push_back(NeuronIn());
-	/* Загружаем пустые нейроны */
-	for (int i = 0; i < 100; i++)
-		deep_neurons_zero.push_back(NeuronDeep());
-	/* Загружаем пустые нейроны */
-	for (int i = 0; i < 100; i++)
-		deep_neurons_one.push_back(NeuronDeep());
+	std::cout << "Neurons initialized" << std::endl;
 
-	cout << "Neurons initialized" << endl;
-
-	/* Добавляем в нейросеть вектор входящих нейронов */
+	/* Добавляем в нейросеть вектор входящих нейронов. */
 	network.addNeurons(in_neurons);
-	/* Добавляем в нейросеть вектор гулбоких нейронов */
-	network.addNeurons(deep_neurons_zero);
-	/* Добавляем в нейросеть вектор гулбоких нейронов */
-	network.addNeurons(deep_neurons_one);
-	/* Добавляем в нейросеть выходной нейрон */
-	network.addNeuron(out_zero);
-	/* Добавляем в нейросеть выходной нейрон */
-	network.addNeuron(out_one);
 
-	cout << "Neurons have been added" << endl;
+	/* Добавляем в нейросеть вектора гулбоких нейронов. */
+	for (auto& deep_neuron : deep_neurons)
+		network.addNeurons(deep_neuron);
 
-	/* Перебираем каждый входной нейрон, создавая соединения */
-	for (int i = 0; i < 100; i++)
+	/* Добавляем в нейросеть выходные нейроны. */
+	for (auto& neuron : out_neurons)
+		network.addNeuron(neuron);
+
+	std::cout << "Neurons have been added" << std::endl;
+
+	/* Перебираем каждый входной нейрон, создавая соединения. */
+	for (auto i = 0; i != HEIGHT_PIXELS * WIDTH_PIXELS; ++i)
 	{
-		/* Соединяем входные нейроны (хранящие информацию о цветах пикселей) с глубокими нейронами для нуля */
-		/* Функция активации - ReLU, скорость обучения - 0.01 */
-		network.createConnection(in_neurons.at(i), deep_neurons_zero.at(i), FunctionType::RELU, 0.01);
-		/* Соединяем входные нейроны (хранящие информацию о цветах пикселей) с глубокими нейронами для единицы */
-		/* Функция активации - ReLU, скорость обучения - 0.01 */
-		network.createConnection(in_neurons.at(i), deep_neurons_one.at(i), FunctionType::RELU, 0.01);
-		/* Соединяем глубокие нейроны для нуля с выходным нейроном для нуля */
-		/* Функция активации - ReLU, скорость обучения - 0.01 */
-		network.createConnection(deep_neurons_zero.at(i), out_zero, FunctionType::RELU, 0.01);
-		/* Соединяем глубокие нейроны для единицы с выходным нейроном для единицы */
-		/* Функция активации - ReLU, скорость обучения - 0.01 */
-		network.createConnection(deep_neurons_one.at(i), out_one, FunctionType::RELU, 0.01);
+		/* Соединяем входные нейроны (хранящие информацию о цветах пикселей) с глубокими нейронами. */
+		for (auto& deep_neuron : deep_neurons)
+			network.createConnection(in_neurons.at(i), deep_neuron.at(i), FunctionType::RELU, 0.01);
+
+		/* Соединяем глубокие нейроны с выходнымы нейронами. */
+		for (auto j = 0; j != DIGITS_LIMIT; ++j) {
+			network.createConnection(deep_neurons.at(j).at(i), out_neurons.at(j), FunctionType::RELU, 0.01);
+		}
 	}
 
-	cout << "Connections initialized" << endl;
+	std::cout << "Connections initialized" << std::endl;
 
-	/* Выполняем обучение нейронной сети в цикле и тысячу раз */
-	for (int i = 0; i < 1000; i++)
+	/* Выполняем обучение нейронной сети. */
+	for (auto epoch = 0; epoch != 1000; ++epoch)
 	{
-		cout << "Learning loop №" << i << endl;
+		if ((epoch + 1) % 50 == 0)
+			std::cout << "Learning epoch #" << epoch + 1 << '\n';
 
-		/* Загружаем во входные нейроны пиксели из первого изображения с нулем */
-		setNeuronsContainer(in_neurons, "./images/0/a.png");
-		/* Сообщаем нейронной сети, что как результат мы хотим видеть ответ 1 (true, или правда) для нейрона с нулем, */
-		/* потому как на изображении у нас действительно находится число нуль */
-		out_zero.setExpectedStatus(1);
-		/* Сообщаем нейронной сети, что как результат мы хотим видеть ответ 0 (false, или ложь) для нейрона с единицей, */
-		/* потому как на изображении у нас находится не единица, а нуль */
-		out_one.setExpectedStatus(0);
-		/* Обучаем нейросеть, чтобы она подстроилась под наши ожидания, которые мы указали выше */
-		network.learn();
+		for (auto i = 0; i != DIGITS_LIMIT; ++i)
+		{
+			for (auto j = 'a'; j != 'h'; ++j)
+			{
+				/* Загружаем во входные нейроны пиксели из изображения. */
+				setNeuronsContainer(in_neurons, "./images/" + std::to_string(i) + '/' + j + ".png");
 
-		/* Загружаем во входные нейроны пиксели из первого изображения с единицей */
-		setNeuronsContainer(in_neurons, "./images/1/a.png");
-		/* Сообщаем нейронной сети, что как результат мы хотим видеть ответ 0 (false, или ложь) для нейрона с нулем, */
-		/* потому как на изображении у нас находится не нуль, а единица */
-		out_zero.setExpectedStatus(0);
-		/* Сообщаем нейронной сети, что как результат мы хотим видеть ответ 1 (true, или правда) для нейрона с единицей, */
-		/* потому как на изображении у нас действительно единица */
-		out_one.setExpectedStatus(1);
-		/* ... */
-		network.learn();
+				/* Сообщаем нейронной сети, что как результат мы хотим видеть ответ (true, или правда) для нейрона с i, */
+				/* 		потому как на изображении у нас действительно находится число i. */
+				for (auto k = 0; k != DIGITS_LIMIT; ++k)
+					out_neurons.at(k).setExpectedStatus(i == k);
 
-		/* Загружаем во входные нейроны пиксели из второго изображения с нулем */
-		setNeuronsContainer(in_neurons, "./images/0/b.png");
-		/* ... */
-		out_zero.setExpectedStatus(1);
-		/* ... */
-		out_one.setExpectedStatus(0);
-		/* ... */
-		network.learn();
-		/* ... */
-
-		/* ... и так далее повторяем те же действия... */
-
-		setNeuronsContainer(in_neurons, "./images/1/b.png");
-		out_zero.setExpectedStatus(0);
-		out_one.setExpectedStatus(1);
-		network.learn();
-
-		setNeuronsContainer(in_neurons, "./images/0/c.png");
-		out_zero.setExpectedStatus(1);
-		out_one.setExpectedStatus(0);
-		network.learn();
-
-		setNeuronsContainer(in_neurons, "./images/1/c.png");
-		out_zero.setExpectedStatus(0);
-		out_one.setExpectedStatus(1);
-		network.learn();
-
-		setNeuronsContainer(in_neurons, "./images/0/d.png");
-		out_zero.setExpectedStatus(1);
-		out_one.setExpectedStatus(0);
-		network.learn();
-
-		setNeuronsContainer(in_neurons, "./images/1/d.png");
-		out_zero.setExpectedStatus(0);
-		out_one.setExpectedStatus(1);
-		network.learn();
-
-		setNeuronsContainer(in_neurons, "./images/0/e.png");
-		out_zero.setExpectedStatus(1);
-		out_one.setExpectedStatus(0);
-		network.learn();
-
-		setNeuronsContainer(in_neurons, "./images/1/e.png");
-		out_zero.setExpectedStatus(0);
-		out_one.setExpectedStatus(1);
-		network.learn();
-
-		setNeuronsContainer(in_neurons, "./images/0/f.png");
-		out_zero.setExpectedStatus(1);
-		out_one.setExpectedStatus(0);
-		network.learn();
-
-		setNeuronsContainer(in_neurons, "./images/1/f.png");
-		out_zero.setExpectedStatus(0);
-		out_one.setExpectedStatus(1);
-		network.learn();
-
-		setNeuronsContainer(in_neurons, "./images/0/g.png");
-		out_zero.setExpectedStatus(1);
-		out_one.setExpectedStatus(0);
-		network.learn();
-
-		setNeuronsContainer(in_neurons, "./images/1/g.png");
-		out_zero.setExpectedStatus(0);
-		out_one.setExpectedStatus(1);
-		network.learn();
+				/* Обучаем нейросеть, чтобы она подстроилась под наши ожидания, которые мы указали выше. */
+				network.learn();
+			}
+		}
 	}
 
-	/* Нейросеть теперь обучена. Делаем две попытки распознать цифры со сторонних, ранее не изученных изображений */
+	/* Нейросеть теперь обучена. Делаем попытки распознать цифры со сторонних, ранее не изученных изображений: */
+	for (auto i = 0; i != DIGITS_LIMIT; ++i)
+	{
+		std::cout << "\nRecognizing image " << i << ".png\n";
 
-	cout << endl << "Recognizing image 0.png" << endl;
-	/* Загружаем во входные нейроны пиксели из изображения с нулем */
-	setNeuronsContainer(in_neurons, "./images/forRecognition/0.png");
-	/* Делаем просчет нейросети, а равно прогнозируем состояние нейронов, или наш ответ */
-	network.compute();
-	/* Выводим предсказанный ответ - число типа double, показывающее, насколько изображение похоже на нуль */
-	/* Если ответ около единицы, это true (правда); иначе - ложь */
-	cout << "\tIt is 0 - " << out_zero.getStatus() << endl;
-	/* Выводим предсказанный ответ - число типа double, показывающее, насколько изображение похоже на единицу */
-	/* Если ответ около единицы, это true (правда); иначе - ложь */
-	cout << "\tIt is 1 - " << out_one.getStatus() << endl;
+		/* Загружаем во входные нейроны пиксели из изображения. */
+		setNeuronsContainer(in_neurons, "./images/forRecognition/" + std::to_string(i) + ".png");
 
-	cout << endl << "Recognizing image 1.png" << endl;
-	/* Загружаем во входные нейроны пиксели из изображения с единицей */
-	setNeuronsContainer(in_neurons, "./images/forRecognition/1.png");
-	/* Делаем просчет нейросети, а равно прогнозируем состояние нейронов, или наш ответ */
-	network.compute();
-	/* Выводим предсказанный ответ - число типа double, показывающее, насколько изображение похоже на нуль */
-	/* Если ответ около единицы, это true (правда); иначе - ложь */
-	cout << "\tIt is 0 - " << out_zero.getStatus() << endl;
-	/* Выводим предсказанный ответ - число типа double, показывающее, насколько изображение похоже на единицу */
-	/* Если ответ около единицы, это true (правда); иначе - ложь */
-	cout << "\tIt is 1 - " << out_one.getStatus() << endl;
+		/* Делаем просчет нейросети, (прогнозируем состояние нейронов == наш ответ). */
+		network.compute();
+
+		/* Выводим предсказанный ответ - число типа double, показывающее, насколько изображение похоже на конкретное число. */
+		for (auto j = 0; j != DIGITS_LIMIT; ++j)
+			std::cout << "\tIt is " << j << " - " << out_neurons.at(j).getStatus() << '\n';
+	}
 }
