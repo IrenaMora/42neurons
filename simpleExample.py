@@ -1,7 +1,5 @@
 import random
-
-
-from build.pylibneurons import *
+from pylibneurons import *
 
 in_first = PyNeuronIn()
 out_first = PyNeuronOut()
