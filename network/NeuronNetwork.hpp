@@ -4,7 +4,12 @@
 
 #pragma once
 
+#include <fstream>
+#include <memory>
+#include <string>
+#include <unordered_map>
 #include <vector>
+
 #include "../neurons/NeuronIn.hpp"
 #include "../neurons/NeuronDeep.hpp"
 #include "../neurons/NeuronOut.hpp"
@@ -51,4 +56,7 @@ public:
 	size_t getCountConnections();
 	void compute();
 	void learn();
+
+	void saveNetwork(const std::string & = "network");
+	void loadNetwork(std::vector<std::unique_ptr<NeuronSimple>> &, const std::string & = "network");
 };

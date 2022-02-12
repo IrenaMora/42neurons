@@ -136,9 +136,6 @@ void	NeuronNetwork::removeNeuron(NeuronSimple &neuron)
 	t_SetToNeurons::iterator begin;
 	t_SetToNeurons::iterator end;
 
-	//Ненужная  проверка
-	//if (neuron.isAvailable())
-	//	throw (NeuronException(0, "The neuron does not use in this neural network"));
 	begin = this->neurons.begin();
 	end = this->neurons.end();
 	while (begin != end)
@@ -226,5 +223,101 @@ void	NeuronNetwork::learn()
 			}
 		}
 		begin++;
+	}
+}
+
+void	NeuronNetwork::saveNetwork(const std::string &file)
+{
+	std::ofstream out(file, std::ios::out | std::ios::binary);
+	if (!out)
+		throw (NeuronException(0, "Unable to open file " + file));
+
+	out << this->getCountNeurons() << '\n';
+	for (const auto &connection : this->connections)
+	{
+		std::string function_type, from_type, to_type;
+		if (connection.getFunctionType() == FunctionType::SIGMOID)
+			function_type = "SIGMOID";
+		else if (connection.getFunctionType() == FunctionType::RELU)
+			function_type = "RELU";
+
+		if (connection.getNeuronFrom().getType() == NeuronType::IN)
+			from_type = "IN";
+		else if (connection.getNeuronFrom().getType() == NeuronType::DEEP)
+			from_type = "DEEP";
+		else if (connection.getNeuronFrom().getType() == NeuronType::OUT)
+			from_type = "OUT";
+
+		if (connection.getNeuronTo().getType() == NeuronType::IN)
+			to_type = "IN";
+		else if (connection.getNeuronTo().getType() == NeuronType::DEEP)
+			to_type = "DEEP";
+		else if (connection.getNeuronTo().getType() == NeuronType::OUT)
+			to_type = "OUT";
+
+		out << &connection.getNeuronFrom() << ' ' << &connection.getNeuronTo() << ' '
+			<< function_type << ' ' << connection.getWeight() << ' ' << connection.getLearningRate() << ' '
+			<< from_type << ' ' << to_type << '\n';
+	}
+}
+
+void	NeuronNetwork::loadNetwork(std::vector<std::unique_ptr<NeuronSimple>> &neurons_container, const std::string &file)
+{
+	std::ifstream in(file, std::ios::in | std::ios::binary);
+	if (!in)
+		throw (NeuronException(0, "Unable to open file " + file));
+
+	this->connections.clear();
+	this->neurons.clear();
+
+	neurons_container.clear();
+	std::unordered_map<std::string, size_t> pointers;
+	size_t neurons_count = 0;
+	in >> neurons_count;
+	neurons_container.reserve(neurons_count);
+
+	std::string from, to, function_type, from_type, to_type;
+	double weight = 0, learning_rate = 0;
+	while (in >> from >> to >> function_type >> weight >> learning_rate >> from_type >> to_type)
+	{
+		if (pointers.find(from) == pointers.end())
+		{
+			if (from_type == "IN")
+				neurons_container.push_back(std::make_unique<NeuronIn>());
+			else if (from_type == "DEEP")
+				neurons_container.push_back(std::make_unique<NeuronDeep>());
+			else if (from_type == "OUT")
+				neurons_container.push_back(std::make_unique<NeuronOut>());
+			else
+				throw (NeuronException(0, "Invalid 'from' neuron type " + from_type));
+
+			pointers[from] = neurons_container.size() - 1;
+			this->addNeuron(*neurons_container.back());
+		}
+
+		if (pointers.find(to) == pointers.end())
+		{
+			if (to_type == "IN")
+				neurons_container.push_back(std::make_unique<NeuronIn>());
+			else if (to_type == "DEEP")
+				neurons_container.push_back(std::make_unique<NeuronDeep>());
+			else if (to_type == "OUT")
+				neurons_container.push_back(std::make_unique<NeuronOut>());
+			else
+				throw (NeuronException(0, "Invalid 'to' neuron type " + to_type));
+
+			pointers[to] = neurons_container.size() - 1;
+			this->addNeuron(*neurons_container.back());
+		}
+
+		auto type = FunctionType::SIGMOID;
+		if (function_type == "SIGMOID")
+			type = FunctionType::SIGMOID;
+		else if (function_type == "RELU")
+			type = FunctionType::RELU;
+		else
+			throw (NeuronException(0, "Invalid function_type " + function_type));
+
+		this->createConnection(*neurons_container[pointers[from]], *neurons_container[pointers[to]], type, learning_rate, weight);
 	}
 }
