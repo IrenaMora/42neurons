@@ -10,7 +10,7 @@ all: $(NAME)
 
 $(NAME): $(CPPFILES) $(HPPFILES)
 	@printf "Compiling object files... "
-	@clang++ -c $(CPPFILES) -Ibase -Iconnection -Iexceptions -Iinterfaces -Inetwork -Ineurons -std=c++11 -O1
+	@clang++ -c $(CPPFILES) -Ibase -Iconnection -Iexceptions -Iinterfaces -Inetwork -Ineurons -std=c++17 -O1
 	@printf "Done!\n"
 	@printf "Creating library... "
 	@ar rcs $(NAME) $(OBJFILES)

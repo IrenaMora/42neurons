@@ -38,6 +38,10 @@ public:
 	/// \brief Operator overload comparison.
 	//////////////////////////////////////////
 	friend bool	operator < (const NeuronConnection &first, const NeuronConnection &second);
+	//////////////////////////////////////////
+	/// \brief Returns weight of connection.
+	//////////////////////////////////////////
+	double	getWeight() const;
 };
 
 //////////////////////////////////////////
@@ -105,6 +109,10 @@ public:
 	/// \brief Returns the number of connections present in the neural network.
 	//////////////////////////////////////////
 	size_t	getCountConnections();
+	//////////////////////////////////////////
+	/// \brief Returns type of the neuron.
+	//////////////////////////////////////////
+	NeuronType getType();
 	friend class NeuronNetwork;
 };
 
@@ -123,7 +131,7 @@ public:
 
 //////////////////////////////////////////
 /// \brief Deep neuron. There is no way to set the status (value). The neural network sets it when learning/calculating on its own.
-/// Just add objects of this class to the neural network, connect them with other neurons properly, and your task will be solved much more efficiently.   
+/// Just add objects of this class to the neural network, connect them with other neurons properly, and your task will be solved much more efficiently.
 //////////////////////////////////////////
 class NeuronDeep : public NeuronSimple
 {
@@ -184,17 +192,17 @@ private:
 public:
 	//////////////////////////////////////////
 	/// \brief Returns whether a neuron exists in this neural network.
-	/// \param neuron Neuron that is being tested for existence  
+	/// \param neuron Neuron that is being tested for existence
 	//////////////////////////////////////////
 	bool isExistNeuron(NeuronSimple &neuron);
 	//////////////////////////////////////////
 	/// \brief Add a neuron to this neural network.
-	/// \param neuron The neuron we are testing.  
+	/// \param neuron The neuron we are testing.
 	//////////////////////////////////////////
 	void addNeuron(NeuronSimple &neuron);
 	//////////////////////////////////////////
 	/// \brief Add neurons to this neural network.
-	/// \param container_neurons Any container containing the neurons we want to add.  
+	/// \param container_neurons Any container containing the neurons we want to add.
 	//////////////////////////////////////////
 	template <typename T>
 	void addNeurons(T &container_neurons)
@@ -210,7 +218,7 @@ public:
 	}
 	//////////////////////////////////////////
 	/// \brief Removes a neuron from this neural network.
-	/// \param neuron Neuron to be deleted.  
+	/// \param neuron Neuron to be deleted.
 	//////////////////////////////////////////
 	void removeNeuron(NeuronSimple &neuron);
 	//////////////////////////////////////////
@@ -218,7 +226,7 @@ public:
 	/// \param from Initial neuron.
 	/// \param to Terminal neuron.
 	/// \param function_type Activation function type.
-	/// \param learning_rate Neural network learning rate. Usually has small fractional values. 
+	/// \param learning_rate Neural network learning rate. Usually has small fractional values.
 	//////////////////////////////////////////
 	void createConnection(NeuronSimple &from, NeuronSimple &to, FunctionType function_type, double learning_rate);
 	//////////////////////////////////////////
@@ -246,5 +254,13 @@ public:
 	/// \brief Trains a neural network.
 	//////////////////////////////////////////
 	void learn();
+	//////////////////////////////////////////
+	/// \brief Save network to a file.
+	//////////////////////////////////////////
+	void saveNetwork(const std::string & = "network");
+	//////////////////////////////////////////
+	/// \brief Load network from a file.
+	//////////////////////////////////////////
+	void loadNetwork(std::vector<std::unique_ptr<NeuronSimple>> &, const std::string & = "network");
 };
 

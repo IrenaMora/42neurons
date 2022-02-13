@@ -19,6 +19,8 @@ const int HEIGHT_PIXELS = 20;
 const int WIDTH_PIXELS = 20;
 const int DIGITS_LIMIT = 10;
 
+// #define LOAD_MODEL
+
 /* Возвращает единицу, если пиксель является черным цветом. */
 inline int getPixelStatus(const Magick::ColorRGB &pixel)
 {
@@ -26,7 +28,11 @@ inline int getPixelStatus(const Magick::ColorRGB &pixel)
 }
 
 /* Устанавливает значения (0 или 1) для всех входящих нейронов в зависимости от цвета пикселя. */
+#ifndef LOAD_MODEL
 void setNeuronsContainer(std::vector<NeuronIn> &in_neurons, const std::string &filename)
+#else
+void setNeuronsContainer(std::vector<std::reference_wrapper<NeuronIn>> &in_neurons, const std::string &filename)
+#endif
 try
 {
 	/* Создание переменной, хращяней в дальнейшем цвет конкретного пикселя. */
@@ -44,7 +50,11 @@ try
 			pixel = image.pixelColor(current_width, current_height);
 			/* Устанавливаем статус (значение) для входящего нейрона: */
 			/* 		1 - если пиксель черный; 0 - если пиксель иного цвета. */
-			in_neurons.at(current_height * HEIGHT_PIXELS + current_width).setStatus(getPixelStatus(pixel));
+			#ifndef LOAD_MODEL
+				in_neurons.at(current_height * HEIGHT_PIXELS + current_width).setStatus(getPixelStatus(pixel));
+			#else
+				in_neurons.at(current_height * HEIGHT_PIXELS + current_width).get().setStatus(getPixelStatus(pixel));
+			#endif
 		}
 	}
 	/* Итого, перебрали каждый пиксель, установив каждому нейрону необходимый статус (значение). */
@@ -64,6 +74,7 @@ catch (const std::exception &e)
 
 int	main()
 {
+#ifndef LOAD_MODEL
 	/* Инициализируем входные нейроны. */
 	std::vector<NeuronIn> in_neurons(HEIGHT_PIXELS * WIDTH_PIXELS);
 
@@ -86,8 +97,7 @@ int	main()
 		network.addNeurons(deep_neuron);
 
 	/* Добавляем в нейросеть выходные нейроны. */
-	for (auto& neuron : out_neurons)
-		network.addNeuron(neuron);
+	network.addNeurons(out_neurons);
 
 	std::cout << "Neurons have been added" << std::endl;
 
@@ -129,6 +139,21 @@ int	main()
 			}
 		}
 	}
+	network.saveNetwork();
+#else
+	NeuronNetwork network;
+	std::vector<std::unique_ptr<NeuronSimple>> neurons;
+	network.loadNetwork(neurons);
+	std::vector<std::reference_wrapper<NeuronIn>> in_neurons;
+	std::vector<std::reference_wrapper<NeuronOut>> out_neurons;
+	for (auto& neuron : neurons)
+	{
+		if (neuron->getType() == NeuronType::IN)
+			in_neurons.push_back(*static_cast<NeuronIn*>(neuron.get()));
+		else if (neuron->getType() == NeuronType::OUT)
+			out_neurons.push_back(*static_cast<NeuronOut*>(neuron.get()));
+	}
+#endif
 
 	/* Нейросеть теперь обучена. Делаем попытки распознать цифры со сторонних, ранее не изученных изображений: */
 	for (auto i = 0; i != DIGITS_LIMIT; ++i)
@@ -143,6 +168,10 @@ int	main()
 
 		/* Выводим предсказанный ответ - число типа double, показывающее, насколько изображение похоже на конкретное число. */
 		for (auto j = 0; j != DIGITS_LIMIT; ++j)
-			std::cout << "\tIt is " << j << " - " << out_neurons.at(j).getStatus() << '\n';
+			#ifndef LOAD_MODEL
+				std::cout << "\tIt is " << j << " - " << out_neurons.at(j).getStatus() << '\n';
+			#else
+				std::cout << "\tIt is " << j << " - " << out_neurons.at(j).get().getStatus() << '\n';
+			#endif
 	}
 }
