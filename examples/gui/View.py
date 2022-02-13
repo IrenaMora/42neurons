@@ -121,7 +121,6 @@ class View(ViewInput):
         return filename
 
     def show_error(self, text: str) -> None:
-        # new_window = Tk()
         messagebox.showerror("Ошибка", text)
         self.root.focus_set()
 
@@ -139,7 +138,6 @@ class View(ViewInput):
         Label(self.bottom_cells[0], text="Input Layer").grid(row=2, column=0, columnspan=2)
         Label(self.bottom_cells[0], text=f"{number_of_input_neurons}").grid(row=0, column=0, columnspan=2)
         self.add_plus_layer_button(1)
-        # self.add_deep_plus_minus_buttons(1)
         Label(self.bottom_cells[2], text="Output Layer").grid(row=2, column=0, columnspan=2)
         Label(self.bottom_cells[2], text=f"{number_of_output_neurons}").grid(row=0, column=0, columnspan=2)
 

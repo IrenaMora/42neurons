@@ -15,7 +15,6 @@ import matplotlib.pyplot as plt
 class Presenter(ViewOutput):
     def __init__(self) -> None:
         self.__number_of_last_deep_layer = -1
-        # self.data_source = data_source
         self.__number_of_input_neurons: int = 0
         self.__number_of_output_neurons: int = 0
         self.__number_of_neurons_in_deep_layer: list[IntVar] = []

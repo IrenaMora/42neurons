@@ -61,7 +61,6 @@ class Layer:
             if self.previous_layer:
                 for previous_layer_neuron in self.previous_layer.neurons:
                     self.__line_between_two_neurons(neuron, previous_layer_neuron)
-        # write Text
         x_text = self.number_of_neurons_in_widest_layer * self.horizontal_distance_between_neurons
         if layerType == 0:
             pyplot.text(x_text, self.y, 'Input Layer', fontsize=12)
