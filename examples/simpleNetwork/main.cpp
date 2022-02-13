@@ -67,7 +67,15 @@ int	main()
 		/* Кладём введенное число в переменную line */
 		getline(cin, line);
 		/* Переводим string в int */
-		value = std::stoi(line);
+		try
+		{
+			value = std::stoi(line);
+		}
+		catch (exception &e)
+		{
+			cout << "Error: value is not correct!" << endl;
+			continue ;
+		}
 		/* Устанавливаем для входящего нейрона значение, равное ранее полученному из введенной пользователем строки */
 		in_first.setStatus(value);
 		/* Предсказываем ответ обученной ранее нейросетью */
