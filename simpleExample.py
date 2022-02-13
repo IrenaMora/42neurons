@@ -4,9 +4,9 @@ from pylibneurons import *
 in_first = PyNeuronIn()
 out_first = PyNeuronOut()
 network = PyNeuronNetwork()
-network.addNeuron(in_first)
-network.addNeuron(out_first)
-network.createConnection(in_first, out_first, PyFunctionType.RELU, 0.01, 0.5)
+network.add_neuron(in_first)
+network.add_neuron(out_first)
+network.create_connection(in_first, out_first, PyFunctionType.RELU, 0.01, 0.5)
 for i in range(20):
 	value = random.randint(1, 100)
 	in_first.status = value

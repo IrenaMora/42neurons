@@ -68,7 +68,7 @@ class CMakeBuild(build_ext):
 
 setup(
     name='pylibneurons',
-    version='0.1',
+    version='0.1.5',
     author='Michael Nazarov',
     author_email='msnazarow@gmail.com',
     long_description='',
