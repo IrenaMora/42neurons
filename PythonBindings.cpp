@@ -21,7 +21,7 @@ PYBIND11_MODULE(pylibneurons, handle) {
     )
     .def(py::init<double>(), py::arg("status") = 0)
     .def_property("status", &NeuronSimple::getStatus, &NeuronSimple::setStatus)
-    .def_property_readonly("countConnections", &NeuronSimple::getCountConnections)
+    .def_property_readonly("count_connections", &NeuronSimple::getCountConnections)
     ;
     py::class_<NeuronIn, NeuronSimple>(
         handle, "PyNeuronIn"
@@ -36,8 +36,8 @@ PYBIND11_MODULE(pylibneurons, handle) {
     py::class_<NeuronOut, NeuronSimple>(
         handle, "PyNeuronOut"
     )
-    .def(py::init<double>(), py::arg("expectedStatus") = 0.0)
-    .def_property("expectedStatus", &NeuronOut::getExpectedStatus, &NeuronOut::setExpectedStatus)
+    .def(py::init<double>(), py::arg("expected_status") = 0.0)
+    .def_property("expected_status", &NeuronOut::getExpectedStatus, &NeuronOut::setExpectedStatus)
     ;
     py::class_<NeuronConnection>(
         handle, "PyNeuronConnection"
@@ -45,24 +45,38 @@ PYBIND11_MODULE(pylibneurons, handle) {
     .def(py::self < py::self)
     ;
     py::class_<NeuronNetwork>(
-    handle, "PyNeuronNetwork")
+    handle, "PyNeuronNetwork", py::dynamic_attr())
     .def(py::init())
-    .def("isExistNeuron", &NeuronNetwork::isExistNeuron)
-    .def("addNeuron", &NeuronNetwork::addNeuron, py::keep_alive<1, 2>())
-    .def("removeNeuron", &NeuronNetwork::removeNeuron)
-    .def("createConnection", py::overload_cast<NeuronSimple &, NeuronSimple &, FunctionType, double, double>(&NeuronNetwork::createConnection))
-    .def("createConnection", py::overload_cast<NeuronSimple &, NeuronSimple &, FunctionType, double>(&NeuronNetwork::createConnection))
-
-    .def_property_readonly("countNeurons", &NeuronNetwork::getCountNeurons)
-    .def_property_readonly("countConnections", &NeuronNetwork::getCountConnections)
+    .def("is_exist_neuron", &NeuronNetwork::isExistNeuron)
+    .def("add_neuron", &NeuronNetwork::addNeuron, py::keep_alive<1, 2>())
+    .def("remove_neuron", &NeuronNetwork::removeNeuron)
+    .def(
+        "create_connection",
+         py::overload_cast<NeuronSimple &, NeuronSimple &, FunctionType, double, double>(&NeuronNetwork::createConnection),
+         py::arg("from"),
+         py::arg("to"),
+         py::arg("function_type"),
+         py::arg("learning_rate"),
+         py::arg("weight")
+    )
+    .def(
+        "create_connection",
+         py::overload_cast<NeuronSimple &, NeuronSimple &, FunctionType, double>(&NeuronNetwork::createConnection),
+         py::arg("from"),
+         py::arg("to"),
+         py::arg("function_type"),
+         py::arg("learning_rate")
+   )
+    .def_property_readonly("count_neurons", &NeuronNetwork::getCountNeurons)
+    .def_property_readonly("count_connections", &NeuronNetwork::getCountConnections)
     .def("compute", &NeuronNetwork::compute)
     .def("learn", &NeuronNetwork::learn)
     ;
     py::enum_<FunctionType>(
         handle, "PyFunctionType"
     )
-    .value("SIGMOID", SIGMOID)
-    .value("RELU", RELU)
+    .value("sigmoid", SIGMOID)
+    .value("relu", RELU)
     .export_values()
     ;
 }

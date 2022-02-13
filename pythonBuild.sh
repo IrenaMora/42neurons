@@ -1,4 +1,6 @@
 git clone https://github.com/pybind/pybind11
-mkdir -p build &&
-cd build &&
-cmake .. && make && python3 ../simpleExample.py
+pip3 install virtualenv
+virtualenv venv
+. venv/bin/activate
+python setup.py install
+python simpleExample.py
