@@ -7,7 +7,7 @@
 #include <cmath>
 #include <sys/time.h>
 #include "NeuronBase.hpp"
-#include "../exceptions/NeuronException.hpp"
+#include "NeuronException.hpp"
 
 
 class NeuronFunctions

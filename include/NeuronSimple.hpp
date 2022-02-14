@@ -4,10 +4,10 @@
 
 #pragma once
 
-#include "../exceptions/NeuronException.hpp"
+#include "NeuronException.hpp"
 
 #include <iostream>
-#include "../base/NeuronBase.hpp"
+#include "NeuronBase.hpp"
 
 using namespace std;
 

@@ -7,10 +7,8 @@ OBJFILES = main.o
 all: $(NAME)
 
 $(NAME): $(CPPFILES) $(HPPFILES)
-	@printf "Compiling 42neurons library\n"
-	@$(MAKE) -C ../../
 	@clang++ -c $(CPPFILES) -std=c++11 -O1 `Magick++-config --cppflags --cxxflags --ldflags --libs`
-	@clang++ $(OBJFILES)   ../../42neurons.a -o $(NAME) `Magick++-config --cppflags --cxxflags --ldflags --libs`
+	@clang++ $(OBJFILES) -l42neurons  -o $(NAME) `Magick++-config --cppflags --cxxflags --ldflags --libs`
 	@printf "Done!\n"
 
 clean:
