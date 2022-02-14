@@ -3,12 +3,12 @@ NAME = imageRecognition
 CPPFILES = main.cpp
 
 OBJFILES = main.o
-
+LIB_INCLUDES = -L$(PWD)/../..
 all: $(NAME)
 
 $(NAME): $(CPPFILES) $(HPPFILES)
 	@clang++ -c $(CPPFILES) -std=c++11 -O1 `Magick++-config --cppflags --cxxflags --ldflags --libs`
-	@clang++ $(OBJFILES) -l42neurons  -o $(NAME) `Magick++-config --cppflags --cxxflags --ldflags --libs`
+	@clang++ $(OBJFILES) $(LIB_INCLUDES) -l42neurons  -o $(NAME) `Magick++-config --cppflags --cxxflags --ldflags --libs`
 	@printf "Done!\n"
 
 clean:
