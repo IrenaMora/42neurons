@@ -8,7 +8,7 @@ CPPFLAGS 	:= -c -MMD -Wall -Wextra -Werror -fPIC -U_FORTIFY_SOURCE -D_FORTIFY_SO
 LDFLAGS 	:= -MMD -Wall -Wextra -Werror # -Wno-unused-result
 DFLAGS 		:= '-O0 -g3'
 ASFLAGS 	:= -fsanitize=address
-SHELL = /bin/zsh
+SHELL 		:= $(shell echo $$SHELL)
 
 ifeq ($(CXX), g++)
 	HFLAGS		= '-pedantic -Wshadow -Wformat=2 -Wfloat-equal\
@@ -38,6 +38,7 @@ D_FILES 	= $(OBJ:.o=.d)
 NAME 		= lib42neurons
 INCLUDES 	= -I$(PWD)/include -I$(PWD)/src
 UNAME 		= $(shell uname)
+SHELL_SHORT := $(subst /bin/,,$(SHELL))
 
 ifeq ($(UNAME), Linux)
 	CFLAGS += -D LINUX=1
@@ -45,11 +46,11 @@ endif
 
 all: directories $(NAME).so
 ifeq ($(UNAME), Linux)
-	$(shell echo 'export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(PWD)' >> ~/.zshrc)
+	$(shell echo 'export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(PWD)' >> ~/.$(SHELL_SHORT)rc)
 else
-	$(shell echo 'export DYLD_LIBRARY_PATH=$$DYLD_LIBRARY_PATH:$(PWD)' >> ~/.zshrc)
+	$(shell echo 'export DYLD_LIBRARY_PATH=$$DYLD_LIBRARY_PATH:$(PWD)' >> ~/.$(SHELL_SHORT)rc)
 endif
-	source ~/.zshrc
+	. ~/.$(SHELL_SHORT)rc
 
 directories: ${OUT_DIR}
 
