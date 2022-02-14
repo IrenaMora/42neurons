@@ -1,8 +1,6 @@
 git clone https://github.com/pybind/pybind11
-pip3 install virtualenv
-cd ../examples/gui/
-virtualenv venv
+python3.9 -m venv venv
 . venv/bin/activate
-pip install -r requirements.txt
-python ../pythonBindings/setup.py install
-python main.py
+pip3 install -r examples/gui/requirements.txt
+python3.9 setup.py install
+python3.9 examples/gui/main.py
