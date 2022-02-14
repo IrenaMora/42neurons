@@ -45,7 +45,7 @@ endif
 
 all: directories $(NAME).so
 ifeq ($(UNAME), Linux)
-	$(shell echo 'export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$$PWD' >> ~/.zshrc)
+	$(shell echo 'export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(PWD)' >> ~/.zshrc)
 else
 	$(shell echo 'export DYLD_LIBRARY_PATH=$$DYLD_LIBRARY_PATH:$(PWD)' >> ~/.zshrc)
 endif
