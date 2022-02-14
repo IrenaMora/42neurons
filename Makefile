@@ -45,10 +45,11 @@ endif
 
 all: directories $(NAME).so
 ifeq ($(UNAME), Linux)
-	sudo cp $(NAME).so /lib/x86_64-linux-gnu/$(NAME).so
-endif
 	$(shell echo 'export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$$PWD' >> ~/.zshrc)
-	. ~/.zshrc
+else
+	$(shell echo 'export DYLD_LIBRARY_PATH=$$DYLD_LIBRARY_PATH:$(PWD)' >> ~/.zshrc)
+endif
+	source ~/.zshrc
 
 directories: ${OUT_DIR}
 
