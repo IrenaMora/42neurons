@@ -10,13 +10,13 @@
 #include <unordered_map>
 #include <vector>
 
-#include "../neurons/NeuronIn.hpp"
-#include "../neurons/NeuronDeep.hpp"
-#include "../neurons/NeuronOut.hpp"
-#include "../exceptions/NeuronException.hpp"
-#include "../base/NeuronBase.hpp"
-#include "../base/NeuronFunctions.hpp"
-#include "../connection/NeuronConnection.hpp"
+#include "NeuronIn.hpp"
+#include "NeuronDeep.hpp"
+#include "NeuronOut.hpp"
+#include "NeuronException.hpp"
+#include "NeuronBase.hpp"
+#include "NeuronFunctions.hpp"
+#include "NeuronConnection.hpp"
 
 class NeuronNetwork
 {

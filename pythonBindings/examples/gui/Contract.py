@@ -60,10 +60,7 @@ class ViewInput(t.Protocol):
 
 @t.runtime_checkable
 class ViewOutput(t.Protocol):
-    @property
-    @abc.abstractmethod
-    def number_of_neurons_in_deep_layer(self) -> list[IntVar]:
-        pass
+    number_of_neurons_in_deep_layer: list[IntVar]
 
     @abc.abstractmethod
     def view_did_load(self, view: ViewInput) -> None:

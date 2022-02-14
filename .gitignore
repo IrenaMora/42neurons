@@ -1,4 +1,6 @@
 *.o
+*.d
+*.so
 42neurons
 .idea
 .vscode

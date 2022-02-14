@@ -4,17 +4,17 @@
 
 #pragma once
 
-#include "../base/NeuronBase.hpp"
-#include "../interfaces/NeuronSimple.hpp"
+#include "NeuronBase.hpp"
+#include "NeuronSimple.hpp"
 
 class NeuronConnection
 {
 private:
+    NeuronSimple	*from;
+    NeuronSimple	*to;
+    FunctionType	function_type;
+    double			learning_rate;
 	double			weight;
-	double			learning_rate;
-	FunctionType	function_type;
-	NeuronSimple	*from;
-	NeuronSimple	*to;
 public:
 	NeuronConnection(NeuronSimple &from, NeuronSimple &to, FunctionType function_type, double learning_rate, double weight);
 	double	getWeight() const;

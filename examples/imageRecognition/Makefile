@@ -3,14 +3,13 @@ NAME = imageRecognition
 CPPFILES = main.cpp
 
 OBJFILES = main.o
-
+LIB_INCLUDES = -L$(PWD)/../..
 all: $(NAME)
 
 $(NAME): $(CPPFILES) $(HPPFILES)
-	@printf "Compiling 42neurons library\n"
-	@$(MAKE) -C ../../
 	@clang++ -c $(CPPFILES) -std=c++11 -O1 `Magick++-config --cppflags --cxxflags --ldflags --libs`
-	@clang++ $(OBJFILES)   ../../42neurons.a -o $(NAME) `Magick++-config --cppflags --cxxflags --ldflags --libs`
+	@clang++ $(OBJFILES) $(LIB_INCLUDES) -l42neurons  -o $(NAME) `Magick++-config --cppflags --cxxflags --ldflags --libs`
+	unzip images.zip
 	@printf "Done!\n"
 
 clean:
@@ -19,6 +18,8 @@ clean:
 	@printf "Done!\n"
 
 fclean: clean
+	rm -rf images
+	rm -rf __MACOSX
 	@rm -rf $(NAME)
 
 re: fclean all

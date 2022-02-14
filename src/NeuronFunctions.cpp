@@ -20,7 +20,7 @@ double	NeuronFunctions::getReLU(double value)
 	return (fmax(0, value));
 }
 
-double	NeuronFunctions::getDerivativeReLU(double value)
+double	NeuronFunctions::getDerivativeReLU(double)
 {
 	return (1);
 }
